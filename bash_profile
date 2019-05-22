@@ -1,0 +1,1 @@
+source /home/darkghost/.profile
