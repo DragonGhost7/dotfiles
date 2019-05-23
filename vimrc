@@ -1,3 +1,10 @@
+""       _
+""__   _(_)_ __ ___  _ __ ___
+""\ \ / / | '_ ` _ \| '__/ __|
+"" \ V /| | | | | | | | | (__
+""  \_/ |_|_| |_| |_|_|  \___|
+""
+
 set nocompatible               " Be iMproved
 
 let vimplug_exists=expand('/home/darkghost/.vim/autoload/plug.vim')
