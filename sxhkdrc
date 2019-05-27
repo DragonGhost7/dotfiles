@@ -50,11 +50,7 @@ alt + c
     /home/darkghost/.bin/camtoggle
 alt + m
     /home/darkghost/.bin/dmenumount
-alt + u
+alt + n
     /home/darkghost/.bin/dmenuunmount
-
-
-
-
-
-
+alt + t
+    /home/darkghost/.bin/dmenutexdoc
