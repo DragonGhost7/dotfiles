@@ -8,7 +8,7 @@
 # yay
 
 mpd
-sxhkd -c /home/darkghost/.sxhkdrc &
-dunst -c /home/darkghost/.config/dunst/dunstrc &
 wal -R
+sxhkd -c /home/darkghost/.sxhkdrc &
+dunst > /dev/null 2>&1  &
 exec i3

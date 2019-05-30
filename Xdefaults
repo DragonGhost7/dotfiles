@@ -8,7 +8,7 @@
 !! Transparency (0-1):
 *.alpha: 0.8
 !! Set a default font and font size as below:
-st.font: Anka/Coder-13
+st.font: Monospace-13
 ! st.termname: st-256color
 ! st.borderpx: 2
 
