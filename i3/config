@@ -167,7 +167,7 @@ bindsym $mod+Shift+5 move container to workspace number 5
 bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws0
 
 # reload the configuration file
@@ -188,12 +188,7 @@ for_window [title="mpvfloat"] floating enable
 for_window [title="mpvfloat"] sticky enable
 
 for_window [title=".*mpv"] floating enable
-
-
-
-
-
-
+for_window [title="npm"]  layout stacking
 
 
 #

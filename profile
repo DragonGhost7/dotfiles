@@ -2,7 +2,7 @@
 # ~/.bash_profile
 #
 
-export BROWSER="firefox"
+export BROWSER="qutebrowser"
 export TERMINAL="st"
 export EDITOR="/usr/sbin/vim"
 [[ -f ~/.bashrc ]] && . ~/.bashrc
