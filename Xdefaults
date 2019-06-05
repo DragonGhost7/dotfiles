@@ -13,22 +13,22 @@ st.font: Monospace-13
 ! st.borderpx: 2
 
 /* !! gruvbox: */
-/* *.color0: #1d2021 */
-/* *.color1: #cc241d */
-/* *.color2: #98971a */
-/* *.color3: #d79921 */
-/* *.color4: #458588 */
-/* *.color5: #b16286 */
-/* *.color6: #689d6a */
-/* *.color7: #a89984 */
-/* *.color8: #928374 */
-/* *.color9: #fb4934 */
-/* *.color10: #b8bb26 */
-/* *.color11: #fabd2f */
-/* *.color12: #83a598 */
-/* *.color13: #d3869b */
-/* *.color14: #8ec07c */
-/* *.color15: #ebdbb2 */
+*.color0: #1d2021
+*.color1: #cc241d
+*.color2: #98971a
+*.color3: #d79921
+*.color4: #458588
+*.color5: #b16286
+*.color6: #689d6a
+*.color7: #a89984
+*.color8: #928374
+*.color9: #fb4934
+*.color10: #b8bb26
+*.color11: #fabd2f
+*.color12: #83a598
+*.color13: #d3869b
+*.color14: #8ec07c
+*.color15: #ebdbb2
 
 /* !! gruvbox light: */
 /* *.color0: #fbf1c7 */
@@ -124,11 +124,38 @@ st.font: Monospace-13
 /* *.color15: #aabac8 */
 
 
-!! URXVt settings
+! URxvt
+!! Settings
+URxvt.termName: rxvt-unicode
+URxvt.buffered: true
+URxvt.loginShell: true
+URxvt.saveLines: 10000
 
-URxvt.scrollBar:false
-Urxvt.cursorColor: white
-Urxvt.font: xft:Font Awesome 5 Brands Regular:style=Regular:size=11
-URxvt.perl-ext-common: default,matcher,resize-font,url-select
+!! Text
+URxvt.font:  -gnu-unifont-medium-r-normal-sans-16-160-75-75-c-80-iso10646-1
+URxvt.cursorBlink: true
+URxvt.depth: 5
+URxvt.borderless: 1
+URxvt.scrollBar: false
+
+!! UI
+URxvt.internalBorder: 20
+
+!! Scrolling
+URxvt.secondaryScroll: true    # Enable Shift-PageUp/Down in screen
+URxvt.scrollTtyKeypress: true
+
+!! Extensions
+URxvt.perl-ext-common: default,matcher,selection-to-clipboard,clipboard
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysum.C-l: perl:url-select:select-next
-URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.clipboard.autocopy: true
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.Alt-p: perl:clipboard:paste
+URxvt.keyboard-select.clipboard: true
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.tabbed.saveLines: 5000
+URxvt.tabbed.scrollBar: false
+URxvt.tabbed.secondaryScroll: true
+URxvt.intensityStyles: false

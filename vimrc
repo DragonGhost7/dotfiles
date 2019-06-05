@@ -49,7 +49,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'dylanaraps/wal.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jreybert/vimagit'
-Plug 'terryma/vim-multiple-cursors'
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 else
@@ -542,6 +541,12 @@ let g:multi_cursor_quit_key            = '<Esc>'
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+
+
+"*****************************************************************************
+nnoremap :vimty :source ~/.vim/vimty.vim
+
+
 
 
 "*****************************************************************************
