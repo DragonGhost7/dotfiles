@@ -458,31 +458,6 @@ nnoremap <Leader>o :.Gbrowse<CR>
 autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
 
-  " YouCompleteMe
-  " -------------------------------------------------------------------
-  let g:ycm_server_python_interpreter = '/usr/bin/python3.5'
-  let g:ycm_confirm_extra_conf = 1
-  let g:ycm_complete_in_comments = 1
-  let g:ycm_collect_identifiers_from_comments_and_strings = 1
-  let g:ycm_auto_start_csharp_server = 0
-  let g:ycm_cache_omnifunc = 0
-  let g:ycm_auto_trigger = 1
-  let g:ycm_confirm_extra_conf = 0
-  let g:ycm_global_ycm_extra_conf = '/home/darkghost/.vim/.ycm_extra_conf.py'
-"""  let g:ycm_global_ycm_extra_conf = '/home/darkghost/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
-  nnoremap gf :YcmCompleter GoToInclude
-  nnoremap gl :YcmCompleter GoToDeclaration
-  nnoremap gd :YcmCompleter GoToDefinition
-  nnoremap gD :YcmCompleter GetDoc
-" python
-" vim-python
-""augroup vimrc-python
-""  autocmd!
-""  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 colorcolumn=79
-""      \ formatoptions+=croq softtabstop=4
-""      \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-""augroup END
-
 " jedi-vim"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#goto_assignments_command = "<leader>g"
@@ -569,6 +544,7 @@ endif
 "*****************************************************************************
 
 " vim-airline
+let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
