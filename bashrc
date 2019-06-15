@@ -115,11 +115,12 @@ GIT_STATUS='$(branchname)'
 PROMPT_CHAR="\$"
 
 
-export PS1="$(tput setab 2)$(tput setaf 15)\u\$(tput sgr0)$(tput setaf 2)$(tput setab 1)$(echo "")$(tput setaf 15)@$(tput setab 5)$(tput setaf 1)$(echo "")$(tput bold) \W\ $(tput setab 3)$(tput setaf 5)$(echo "")$(tput setaf 7)$GIT_STATUS$(tput sgr0)$(tput setaf 3)$(echo "")$(tput sgr0)"
+export PS1="\[$(tput setaf 2)\]$(echo "")\[$(tput setab 2)\]\[$(tput setaf 15)\]\u\[$(tput setaf 2)\]\[$(tput setab 1)\]$(echo "")\[$(tput setaf 15)\]@\[$(tput setab 15)\]\[$(tput setaf 1)\]$(echo "")\h\[$(tput setaf 15)\]\[$(tput setab 3)\]$(echo "")\[$(tput bold)\] \W\ \[$(tput setab 5)\]\[$(tput setaf 3)\]$(echo "")\[$(tput setaf 7)\]$GIT_STATUS\[$(tput sgr0)\]\[$(tput setaf 5)\]$(echo "")\[$(tput sgr0)\]$PROMPT_CHAR "
 
 
 #if [ "$EUID" -ne 0 ]
-#then export PS1="\[$boldgreen\]\u\[$cyan\]@\[$boldred\]\h \[$cyan\]{\[$boldwhite\]\W\[$cyan\]}\[$reset\]$GIT_STATUS\[$reset\]$PROMPT_CHAR "
+#then
+#export PS1="\[$boldgreen\]\u\[$cyan\]@\[$boldred\]\h \[$cyan\]{\[$boldwhite\]\W\[$cyan\]}\[$reset\]$GIT_STATUS\[$reset\]$PROMPT_CHAR "
 #    else export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]ROOT\[$(tput setaf 2)\]@\[$(tput setaf 4)\]$(hostname | awk '{print toupper($0)}') \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 #    fi
 #    . /usr/share/bash-completion/bash_completion
