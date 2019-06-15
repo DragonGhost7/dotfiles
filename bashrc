@@ -108,17 +108,20 @@ boldyellow=$(tput setaf 3)$(tput bold)
 PARENCLR=$'\001\e[0;36m\002'
 BRANCHCLR=$'\001\e[1;33m\002'
 
-alias branchname="git branch 2>/dev/null | sed -ne 's/^* \(.*\)/ ${PARENCLR}(${BRANCHCLR}\1${PARENCLR}\)/p'"
+alias branchname="git branch 2>/dev/null | sed -ne 's/^* \(.*\)/ \1/p'"
 
 GIT_STATUS='$(branchname)'
 
 PROMPT_CHAR="\$"
-#export PS1="$(tput setaf 4) sudo $(tput setab 4)$(tput setaf 0)$(echo "")$(tput setab 4)$(tput setaf 0) password for %p $(tput sgr0)$(tput setaf 4)$(echo "")$(tput sgr0) "
-#
-if [ "$EUID" -ne 0 ]
-then export PS1="\[$boldgreen\]\u\[$cyan\]@\[$boldred\]\h \[$cyan\]{\[$boldwhite\]\W\[$cyan\]}\[$reset\]$GIT_STATUS\[$reset\]$PROMPT_CHAR "
-    else export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]ROOT\[$(tput setaf 2)\]@\[$(tput setaf 4)\]$(hostname | awk '{print toupper($0)}') \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
-    fi
+
+
+export PS1="$(tput setab 2)$(tput setaf 15)\u\$(tput sgr0)$(tput setaf 2)$(tput setab 1)$(echo "")$(tput setaf 15)@$(tput setab 5)$(tput setaf 1)$(echo "")$(tput bold) \W\ $(tput setab 3)$(tput setaf 5)$(echo "")$(tput setaf 7)$GIT_STATUS$(tput sgr0)$(tput setaf 3)$(echo "")$(tput sgr0)"
+
+
+#if [ "$EUID" -ne 0 ]
+#then export PS1="\[$boldgreen\]\u\[$cyan\]@\[$boldred\]\h \[$cyan\]{\[$boldwhite\]\W\[$cyan\]}\[$reset\]$GIT_STATUS\[$reset\]$PROMPT_CHAR "
+#    else export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]ROOT\[$(tput setaf 2)\]@\[$(tput setaf 4)\]$(hostname | awk '{print toupper($0)}') \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
+#    fi
 #    . /usr/share/bash-completion/bash_completion
 
 # enable color support of ls and also add handy aliases
