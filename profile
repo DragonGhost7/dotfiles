@@ -2,7 +2,9 @@
 # ~/.bash_profile
 #
 
-export BROWSER="qutebrowser"
+figlet WELCOME $USER -f slant  | lolcat
+
+export BROWSER="firefox"
 export TERMINAL="st"
 export EDITOR="/usr/sbin/vim"
 [[ -f ~/.bashrc ]] && . ~/.bashrc

@@ -8,6 +8,10 @@
 # for examples
 
 # If not running interactively, don't do anything
+#nice
+#figlet WELCOME BACK  $USER -f slant -n | lolcat
+#nice
+
 case $- in
     *i*) ;;
       *) return;;
@@ -25,7 +29,7 @@ set -o vi
 # Alternative (blocks terminal for 0-3ms)
 
 # To add support for TTYs this line can be optionally added.
-source ~/.cache/wal/colors-tty.sh
+#source ~/.cache/wal/colors-tty.sh
 source /home/darkghost/nerd-fonts/bin/scripts/lib/i_all.sh
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -109,7 +113,8 @@ alias branchname="git branch 2>/dev/null | sed -ne 's/^* \(.*\)/ ${PARENCLR}(${B
 GIT_STATUS='$(branchname)'
 
 PROMPT_CHAR="\$"
-
+#export PS1="$(tput setaf 4) sudo $(tput setab 4)$(tput setaf 0)$(echo "")$(tput setab 4)$(tput setaf 0) password for %p $(tput sgr0)$(tput setaf 4)$(echo "")$(tput sgr0) "
+#
 if [ "$EUID" -ne 0 ]
 then export PS1="\[$boldgreen\]\u\[$cyan\]@\[$boldred\]\h \[$cyan\]{\[$boldwhite\]\W\[$cyan\]}\[$reset\]$GIT_STATUS\[$reset\]$PROMPT_CHAR "
     else export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]ROOT\[$(tput setaf 2)\]@\[$(tput setaf 4)\]$(hostname | awk '{print toupper($0)}') \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
