@@ -8,11 +8,12 @@
 !! Transparency (0-1):
 *.alpha: 0.8
 !! Set a default font and font size as below:
-st.font:  Symbola-12
-! st.termname: st-256color
-! st.borderpx: 2
+st.font:  Monospace-12
+!!st.cursorColor: #cee0de
+st.termname: st-256color
+!! st.borderpx: 1
 
-/* !! gruvbox: */
+!! gruvbox:
 *.color0: #1d2021
 *.color1: #cc241d
 *.color2: #98971a
@@ -67,7 +68,7 @@ st.font:  Symbola-12
 /* *.color14:     #0f7ddb */
 /* *.color7:      #d6dbe5 */
 /* *.color15:     #ffffff */
-/* *.colorBD:     #d6dbe5 */
+/* * *.colorBD:     #d6dbe5 *1/ */
 
 /* ! base16 */
 /* *.color0:       #181818 */

@@ -24,7 +24,7 @@ set -o vi
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
-(cat /home/darkghost/.cache/wal/sequences &)
+# (cat /home/darkghost/.cache/wal/sequences &)
 
 # Alternative (blocks terminal for 0-3ms)
 
@@ -114,8 +114,8 @@ GIT_STATUS='$(branchname)'
 
 PROMPT_CHAR="\$"
 
-
-export PS1="\[$(tput setaf 2)\]$(echo "")\[$(tput setab 2)\]\[$(tput setaf 15)\]\u\[$(tput setaf 2)\]\[$(tput setab 1)\]$(echo "")\[$(tput setaf 15)\]@\[$(tput setab 15)\]\[$(tput setaf 1)\]$(echo "")\h\[$(tput setaf 15)\]\[$(tput setab 3)\]$(echo "")\[$(tput bold)\] \W\ \[$(tput setab 5)\]\[$(tput setaf 3)\]$(echo "")\[$(tput setaf 7)\]$GIT_STATUS\[$(tput sgr0)\]\[$(tput setaf 5)\]$(echo "")\[$(tput sgr0)\]$PROMPT_CHAR "
+#\[$(tput setaf 2)\]$(echo "")
+export PS1="\[$(tput setab 2)\]\[$(tput setaf 15)\] \u\[$(tput setaf 2)\]\[$(tput setab 1)\]$(echo "")\[$(tput setaf 15)\]@\[$(tput setab 15)\]\[$(tput setaf 1)\]$(echo "")\h\[$(tput setaf 15)\]\[$(tput setab 3)\]$(echo "")\[$(tput bold)\] \W\ \[$(tput setab 5)\]\[$(tput setaf 3)\]$(echo "")\[$(tput setaf 7)\]$GIT_STATUS\[$(tput sgr0)\]\[$(tput setaf 5)\]$(echo "")\[$(tput sgr0)\]$PROMPT_CHAR "
 
 
 #if [ "$EUID" -ne 0 ]
