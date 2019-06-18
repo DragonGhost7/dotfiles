@@ -79,21 +79,8 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-#if [ "$color_prompt" = yes ]; then
-#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-#else
-#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-#fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-#case "$TERM" in
-#xterm*|rxvt*)
-#    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-#    ;;
-#*)
-#    ;;
-#esac
 
 GREEN="\[$(tput setaf 1)\]"
 RESET="\[$(tput sgr0)\]"
@@ -113,17 +100,13 @@ alias branchname="git branch 2>/dev/null | sed -ne 's/^* \(.*\)/ \1/p'"
 GIT_STATUS='$(branchname)'
 
 PROMPT_CHAR="\$"
+if [ "$TERM" != "linux" ];then
+    export PS1="\[$(tput setab 2)\]\[$(tput setaf 15)\] \u\[$(tput setaf 2)\]\[$(tput setab 1)\]$(echo "")\[$(tput setaf 15)\]@\[$(tput setab 15)\]\[$(tput setaf 1)\]$(echo "")\h\[$(tput setaf 15)\]\[$(tput setab 3)\]$(echo "")\[$(tput bold)\] \W\ \[$(tput setab 5)\]\[$(tput setaf 3)\]$(echo "")\[$(tput setaf 7)\]$GIT_STATUS\[$(tput sgr0)\]\[$(tput setaf 5)\]$(echo "")\[$(tput sgr0)\]$PROMPT_CHAR "
+else
 
-#\[$(tput setaf 2)\]$(echo "")
-export PS1="\[$(tput setab 2)\]\[$(tput setaf 15)\] \u\[$(tput setaf 2)\]\[$(tput setab 1)\]$(echo "")\[$(tput setaf 15)\]@\[$(tput setab 15)\]\[$(tput setaf 1)\]$(echo "")\h\[$(tput setaf 15)\]\[$(tput setab 3)\]$(echo "")\[$(tput bold)\] \W\ \[$(tput setab 5)\]\[$(tput setaf 3)\]$(echo "")\[$(tput setaf 7)\]$GIT_STATUS\[$(tput sgr0)\]\[$(tput setaf 5)\]$(echo "")\[$(tput sgr0)\]$PROMPT_CHAR "
-
-
-#if [ "$EUID" -ne 0 ]
-#then
-#export PS1="\[$boldgreen\]\u\[$cyan\]@\[$boldred\]\h \[$cyan\]{\[$boldwhite\]\W\[$cyan\]}\[$reset\]$GIT_STATUS\[$reset\]$PROMPT_CHAR "
+export PS1="\[$boldgreen\]\u\[$cyan\]@\[$boldred\]\h \[$cyan\]{\[$boldwhite\]\W\[$cyan\]}\[$reset\]$GIT_STATUS\[$reset\]$PROMPT_CHAR "
 #    else export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]ROOT\[$(tput setaf 2)\]@\[$(tput setaf 4)\]$(hostname | awk '{print toupper($0)}') \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
-#    fi
-#    . /usr/share/bash-completion/bash_completion
+fi
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
