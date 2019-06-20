@@ -395,7 +395,6 @@ bindsym $mod+r mode "resize"
 #    modifier None
 #}
 
-exec_always --no-startup-id setbg ~/.config/wall.png
 exec_always --no-startup-id touch /tmp/recordingicon
 exec_always --no-startup-id /home/darkghost/.config/polybar/launch.sh
 exec_always --no-startup-id compton -f

@@ -101,7 +101,7 @@ GIT_STATUS='$(branchname)'
 
 PROMPT_CHAR="\$"
 if [ "$TERM" != "linux" ];then
-    export PS1="\[$(tput setab 2)\]\[$(tput setaf 15)\] \u\[$(tput setaf 2)\]\[$(tput setab 1)\]$(echo "")\[$(tput setaf 15)\]@\[$(tput setab 15)\]\[$(tput setaf 1)\]$(echo "")\h\[$(tput setaf 15)\]\[$(tput setab 3)\]$(echo "")\[$(tput bold)\] \W\ \[$(tput setab 5)\]\[$(tput setaf 3)\]$(echo "")\[$(tput setaf 7)\]$GIT_STATUS\[$(tput sgr0)\]\[$(tput setaf 5)\]$(echo "")\[$(tput sgr0)\]$PROMPT_CHAR "
+    export PS1="\[$(tput setab 2)\]\[$(tput setaf 15)\] \u\[$(tput setaf 2)\]\[$(tput setab 1)\]$(echo "")\[$(tput setaf 15)\]@\[$(tput setab 15)\]\[$(tput setaf 1)\]$(echo "")\h\[$(tput setaf 15)\]\[$(tput setab 3)\]$(echo "")\[$(tput bold)\] \W \[$(tput setab 5)\]\[$(tput setaf 3)\]$(echo "")\[$(tput setaf 7)\]$GIT_STATUS\[$(tput sgr0)\]\[$(tput setaf 5)\]$(echo "")\[$(tput sgr0)\]$PROMPT_CHAR "
 else
 
 export PS1="\[$boldgreen\]\u\[$cyan\]@\[$boldred\]\h \[$cyan\]{\[$boldwhite\]\W\[$cyan\]}\[$reset\]$GIT_STATUS\[$reset\]$PROMPT_CHAR "
