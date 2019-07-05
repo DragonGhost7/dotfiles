@@ -180,6 +180,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #
 
 
+##workspace 7 output  DP1-3
+
+
 
 ## Window settings
 
@@ -396,5 +399,5 @@ bindsym $mod+r mode "resize"
 #}
 
 exec_always --no-startup-id touch /tmp/recordingicon
+exec_always --no-startup-id compton
 exec_always --no-startup-id /home/darkghost/.config/polybar/launch.sh
-exec_always --no-startup-id compton -f

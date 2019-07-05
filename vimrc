@@ -6,6 +6,7 @@
 ""
 
 set nocompatible               " Be iMproved
+" PLUGIN {{{
 
 let vimplug_exists=expand('/home/darkghost/.vim/autoload/plug.vim')
 
@@ -49,51 +50,23 @@ if exists('make')
         let g:make = 'make'
 endif
 Plug 'Shougo/vimproc.vim', {'do': g:make}
-
-"" Vim-Session
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-
 if v:version >= 703
   Plug 'Shougo/vimshell.vim'
 endif
 
-
-
-"" Color
-
-"*****************************************************************************
-"" Custom bundles
-"*****************************************************************************
-
-" c
 Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
 Plug 'ludwig/split-manpage.vim'
-
-
-" python
-"" Python Bundle
-""Plug 'davidhalter/jedi-vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-
-
-"*****************************************************************************
-"*****************************************************************************
-
-"" Include user's extra bundle
-if filereadable(expand("/home/darkghost/.vimrc.local.bundles"))
-  source /home/darkghost/.vimrc.local.bundles
-endif
-
 call plug#end()
 
-" Required:
+" }}}
+
 filetype plugin indent on
 
 
-"*****************************************************************************
-"" Basic Setup
-"*****************************************************************************"
+"" Basic Setup {{{
 "" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -140,9 +113,9 @@ let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
 
-"*****************************************************************************
-"" Visual Settings
-"*****************************************************************************
+" }}}
+
+" Visual Settings {{{
 
 " Enable Goyo by default for mutt writting
 	" Goyo's width will be the line limit in mutt.
@@ -219,26 +192,9 @@ if exists("*fugitive#statusline")
   set statusline+=%{fugitive#statusline()}
 endif
 
-" vim-airline
-let g:airline_theme = 'powerlineish'
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_skip_empty_sections = 1
+" }}}
 
-"function! InitAirline()
-""    let g:airline_section_a = airline#section#create(['mode','','branch'])
-""    let g:airline_section_b = airline#section#create_left(['ffenc','hunks','%f'])
-""    let g:airline_section_c = airline#section#create(['filetype'])
-""    let g:airline_section_x = airline#section#create(['%P'])
-""    let g:airline_section_y = airline#section#create(['%B'])
-""    let g:airline_section_z = airline#section#create_right(['%l','%c'])
-"endfunction
-"autocmd VimEnter * call InitAirline()
-
-"*****************************************************************************
-"" Abbreviations
-"*****************************************************************************
+" Abbreviations {{{
 "" no one is really happy until you have this shortcuts
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
@@ -251,7 +207,9 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
-"" NERDTree configuration
+" }}}
+
+" NERDTree configuration {{{
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
@@ -263,15 +221,16 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<CR>
 
+" }}}
 
-" vimshell.vim
+" vimshell.vim {{{
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 let g:vimshell_prompt =  '$ '
 
 
-"*****************************************************************************
-"" Functions
-"*****************************************************************************
+" }}}
+
+" Functions {{{
 if !exists('*s:setupWrapping')
   function s:setupWrapping()
     set wrap
@@ -280,9 +239,9 @@ if !exists('*s:setupWrapping')
   endfunction
 endif
 
-"*****************************************************************************
-"" Autocmd Rules
-"*****************************************************************************
+" }}}
+
+" Autocmd Rules {{{
 "" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
 augroup vimrc-sync-fromstart
   autocmd!
@@ -310,20 +269,20 @@ augroup END
 
 set autoread
 
-"*****************************************************************************
-"" Mappings
-"*****************************************************************************
-"" Navigation
+" }}}
+
+" Mappings {{{
+" Navigation {{{
 inoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
 vnoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
 map <Space><Tab> <Esc>/<++><Enter>"_c4l
 inoremap ;gui <++>"
-
-"" Split
+"}}}
+" Split {{{
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
-
-"" Git
+"}}}
+" Git {{{
 noremap <Leader>ga :Gwrite<CR>
 noremap <Leader>gc :Gcommit<CR>
 noremap <Leader>gsh :Gpush<CR>
@@ -332,30 +291,34 @@ noremap <Leader>gs :Gstatus<CR>
 noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gd :Gvdiff<CR>
 noremap <Leader>gr :Gremove<CR>
-
-" session management
+" }}}
+" session management {{{
 nnoremap <leader>so :OpenSession<Space>
 nnoremap <leader>ss :SaveSession<Space>
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
+" }}}
 
-
-"" Tabs
+" Tabs {{{
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 nnoremap <silent> <S-t> :tabnew<CR>
 nnoremap <C-Tab> :tabclose<CR>
 
-"""viman
+" }}}
+
+"viman {{{
 map <leader>k <Plug>(Man)
 map <C-m> <Plug>(Vman)
-"" Set working directory
-nnoremap <leader>. :lcd %:p:h<CR>
 
-"" Opens an edit command with the path of the currently edited file filled in
+"}}}
+
+" Set working directory
+nnoremap <leader>. :lcd %:p:h<CR>
+" Opens an edit command with the path of the currently edited file filled in
 noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
-"" Opens a tab edit command with the path of the currently edited file filled
+" Opens a tab edit command with the path of the currently edited file filled
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 "" fzf.vim
@@ -380,7 +343,9 @@ cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>e :FZF -m<CR>
 
-" syntastic
+" }}}
+
+" syntastic {{{
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
@@ -400,59 +365,59 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" }}}
 
-
-" Disable visualbell
-set noerrorbells visualbell t_vb=
-if has('autocmd')
-  autocmd GUIEnter * set visualbell t_vb=
-endif
-
-"" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
-
-noremap YY "+y<CR>
-noremap <leader>p "+gP<CR>
-noremap XX "+x<CR>
-
-if has('macunix')
-  " pbcopy for OSX copy/paste
-  vmap <C-x> :!pbcopy<CR>
-  vmap <C-c> :w !pbcopy<CR><CR>
-endif
-
-"" Buffer nav
+" Navigation {{{
+" Buffer nav {{{
 noremap <leader>z :bp<CR>
 noremap <leader>q :bp<CR>
 noremap <leader>x :bn<CR>
 noremap <leader>w :bn<CR>
 
-"" Close buffer
+" }}}
+
+" Close buffer {{{
 noremap <leader>c :bd<CR>
 
-"" Clean search (highlight)
+" }}}
+
+" Clean search (highlight) {{{
 nnoremap <silent> <leader><space> :noh<cr>
 
-"" Switching windows
+" }}}
+
+" Switching windows {{{
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
-"" Vmap for maintain Visual Mode after shifting > and <
+" }}}
+
+" Vmap for maintain Visual Mode after shifting > and < {{{
 vmap < <gv
 vmap > >gv
 
-"" Move visual block
+" }}}
+
+" Move visual block {{{
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+" }}}
 
-"*****************************************************************************
-"" Custom configs
-"*****************************************************************************
+" }}}
+
+" Folding {{{
+set foldclose=all " Close folds if you leave them in any way
+set foldenable " Turn on folding
+set foldlevel=0 " Autofold everything by default
+set foldmethod=marker " Fold on the marker
+set foldopen=all " Open folds if you touch them in any way
+
+" }}}
+
+" Custom configs {{{
 " c
 autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
@@ -493,32 +458,35 @@ let g:multi_cursor_prev_key            = '<C-b>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-"*****************************************************************************
-"*****************************************************************************
-
-"" Include user's local vim config
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
-
-
-"*****************************************************************************
 :command Vimty :source ~/.vim/vimty.vim
 
 
+" Disable visualbell
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+  autocmd GUIEnter * set visualbell t_vb=
+endif
+
+"" Copy/Paste/Cut
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
+
+noremap YY "+y<CR>
+noremap <leader>p "+gP<CR>
+noremap XX "+x<CR>
 
 
-"*****************************************************************************
-"*****************************************************************************
-"" Markdown
-"*****************************************************************************
+" }}}
 
-"".bib
+" .bib {{{
     autocmd FileType bib inoremap ,a @article{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>journal<Space>=<Space>{<++>},<Enter>volume<Space>=<Space>{<++>},<Enter>pages<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
     autocmd FileType bib inoremap ,b @book{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>6kA,<Esc>i
     autocmd FileType bib inoremap ,c @incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
 
-"MARKDOWN
+" }}}
+
+" MARKDOWN {{{
     autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
     autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
     autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
@@ -537,12 +505,16 @@ endif
 
     map <F5> :w! \| !compiler <c-r>%<CR>
     map .p :!opout <c-r>%<CR><CR>
+" }}}
 
-"*****************************************************************************
-"" Convenience variables
-"*****************************************************************************
+" Powerline variables  {{{
 
-" vim-airline
+" vim-airline {{{
+let g:airline_theme = 'powerlineish'
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_skip_empty_sections = 1
 let g:airline_theme='wal'
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
@@ -570,7 +542,8 @@ else
   let g:airline#extensions#tabline#left_sep = ''
   let g:airline#extensions#tabline#left_alt_sep = ''
 
-  " powerline symbols
+" }}}
+  " powerline symbols {{{
   let g:airline_left_sep = ''
   let g:airline_left_alt_sep = ''
   let g:airline_right_sep = ''
@@ -579,3 +552,5 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
+" }}}
