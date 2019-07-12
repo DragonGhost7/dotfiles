@@ -180,9 +180,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #
 
 
-##workspace 7 output  DP1-3
-
-
 
 ## Window settings
 
