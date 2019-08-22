@@ -30,7 +30,7 @@ set -o vi
 
 # To add support for TTYs this line can be optionally added.
 #source ~/.cache/wal/colors-tty.sh
-source /home/darkghost/nerd-fonts/bin/scripts/lib/i_all.sh
+#source /home/darkghost/nerd-fonts/bin/scripts/lib/i_all.sh
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth

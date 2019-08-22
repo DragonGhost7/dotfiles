@@ -7,9 +7,9 @@
 # shortcut configs because i3 cant do anything by itself
 
 super + {b,n,p}
-    mpc {prev, next, toggle}
+    /home/darkghost/.bin/musicctl.sh  {b, n, p}
 super + {e,d}
-    mpc volume {+5,-5}
+    /home/darkghost/.bin/volumectl.py {+5%,-5%}
 super + o
     /home/darkghost/.bin/dmenuplaylist
 super + a
