@@ -158,3 +158,5 @@ export PATH=/usr/bin:$PATH
 export PATH=/usr/sbin:$PATH
 export PATH=$PATH:/home/darkghost/.bin
 export PATH=$PATH:/home/darkghost/mutt-wizard/bin
+
+eval "$(thefuck --alias)"

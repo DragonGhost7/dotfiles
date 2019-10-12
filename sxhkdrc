@@ -41,7 +41,8 @@ alt + Return
 alt + F4
     arandr
 alt + d
-    rofi -config ~/.config/rofi/config.rasi -show run
+##    rofi -config ~/.config/rofi/config.rasi -show run
+    /home/darkghost/.bin/appsmenu
 super + s
     killall screenkey || screenkey
 alt + Print

@@ -11,4 +11,4 @@ mpd
 setbg /home/darkghost/.config/wall.png
 sxhkd -c /home/darkghost/.sxhkdrc &
 dunst > /dev/null 2>&1  &
-exec i3
+exec startkde

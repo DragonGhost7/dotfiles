@@ -160,3 +160,21 @@ URxvt.tabbed.saveLines: 5000
 URxvt.tabbed.scrollBar: false
 URxvt.tabbed.secondaryScroll: true
 URxvt.intensityStyles: false
+
+! ===== XLock ====
+XLock.dpmsoff:          1
+XLock.description:      on
+XLock.echokeys:         off
+XLock.showfps:          off
+XLock.foreground:       #00FF41
+XLock.background:       black
+XLock.lockdelay:        30
+XLock.timeout:          15
+XLock.info:             "screen is locked"
+XLock.mode:             matrix
+XLock.username:         "User: "
+XLock.password:         "S/Key: "
+XLock.icongeometry:     96x96
+XLock.enablesaver:      on
+XLock.fontset:          -sgi-screen-medium-r-normal--16-160-72-72-m-80-iso8859-1
+XLock.planfontset:      -sgi-screen-medium-r-normal--14-140-72-72-m-80-iso8859-1
