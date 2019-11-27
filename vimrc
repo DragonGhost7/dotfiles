@@ -45,6 +45,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'dylanaraps/wal.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jreybert/vimagit'
+Plug 'davidhalter/jedi-vim'
 let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
@@ -53,7 +54,7 @@ Plug 'Shougo/vimproc.vim', {'do': g:make}
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 if v:version >= 703
-  Plug 'Shougo/vimshell.vim'
+Plug 'Shougo/vimshell.vim'
 endif
 
 Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
@@ -102,9 +103,9 @@ set path+=**
 set fileformats=unix,dos,mac
 set wildmenu
 if exists('$SHELL')
-    set shell=$SHELL
+set shell=$SHELL
 else
-    set shell=/bin/sh
+set shell=/bin/sh
 endif
 
 " session management
@@ -118,12 +119,12 @@ let g:session_command_aliases = 1
 " Visual Settings {{{
 
 " Enable Goyo by default for mutt writting
-	" Goyo's width will be the line limit in mutt.
-	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
+" Goyo's width will be the line limit in mutt.
+autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
+autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
 
 " Spellcheck
-    map <F6> :setlocal spell! <CR>
+map <F6> :setlocal spell! <CR>
 
 autocmd BufWritePre * %s/\s\+$//e
 syntax on
@@ -132,7 +133,7 @@ set number relativenumber
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-  colorscheme wal
+colorscheme wal
 endif
 
 set mousemodel=popup
@@ -141,33 +142,33 @@ set guioptions=egmrti
 set gfn=Monospace\ 10
 
 if has("gui_running")
-  if has("gui_mac") || has("gui_macvim")
-    set guifont=Menlo:h12
-    set transparency=7
-  endif
+if has("gui_mac") || has("gui_macvim")
+set guifont=Menlo:h12
+set transparency=7
+endif
 else
-  let g:CSApprox_loaded = 1
+let g:CSApprox_loaded = 1
 
-  " IndentLine
-  let g:indentLine_enabled = 1
-  let g:indentLine_concealcursor = 0
-  let g:indentLine_char = '┆'
-  let g:indentLine_faster = 1
+" IndentLine
+let g:indentLine_enabled = 1
+let g:indentLine_concealcursor = 0
+let g:indentLine_char = '┆'
+let g:indentLine_faster = 1
 
 
-  if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-  else
-    if $TERM == 'xterm'
-      set term=xterm-256color
-    endif
-  endif
+if $COLORTERM == 'gnome-terminal'
+set term=gnome-256color
+else
+if $TERM == 'xterm'
+  set term=xterm-256color
+endif
+endif
 
 endif
 
 
 if &term =~ '256color'
-  set t_ut=
+set t_ut=
 endif
 
 "" Status bar
@@ -189,7 +190,7 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 
 if exists("*fugitive#statusline")
-  set statusline+=%{fugitive#statusline()}
+set statusline+=%{fugitive#statusline()}
 endif
 
 " }}}
@@ -232,11 +233,11 @@ let g:vimshell_prompt =  '$ '
 
 " Functions {{{
 if !exists('*s:setupWrapping')
-  function s:setupWrapping()
-    set wrap
-    set wm=2
-    set textwidth=79
-  endfunction
+function s:setupWrapping()
+set wrap
+set wm=2
+set textwidth=79
+endfunction
 endif
 
 " }}}
@@ -244,27 +245,27 @@ endif
 " Autocmd Rules {{{
 "" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
 augroup vimrc-sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync maxlines=200
+autocmd!
+autocmd BufEnter * :syntax sync maxlines=200
 augroup END
 
 "" Remember cursor position
 augroup vimrc-remember-cursor-position
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+autocmd!
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
 "" txt
 augroup vimrc-wrapping
-  autocmd!
-  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
+autocmd!
+autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 augroup END
 
 "" make/cmake
 augroup vimrc-make-cmake
-  autocmd!
-  autocmd FileType make setlocal noexpandtab
-  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
+autocmd!
+autocmd FileType make setlocal noexpandtab
+autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
 
 set autoread
@@ -328,15 +329,15 @@ let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/
 
 " The Silver Searcher
 if executable('ag')
-  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-  set grepprg=ag\ --nogroup\ --nocolor
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+set grepprg=ag\ --nogroup\ --nocolor
 endif
 
 " ripgrep
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+set grepprg=rg\ --vimgrep
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
 
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
@@ -423,6 +424,7 @@ autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
 
 " jedi-vim"
+let g:jedi#auto_initialization = 1
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_definitions_command = "<C-d>"
@@ -430,7 +432,6 @@ let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>n"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
 let g:jedi#smart_auto_mappings = 1
 let g:jedi#popup_on_dot = 1
 " syntastic
@@ -464,12 +465,12 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " Disable visualbell
 set noerrorbells visualbell t_vb=
 if has('autocmd')
-  autocmd GUIEnter * set visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 endif
 
 "" Copy/Paste/Cut
 if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
+set clipboard=unnamed,unnamedplus
 endif
 
 noremap YY "+y<CR>
