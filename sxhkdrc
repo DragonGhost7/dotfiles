@@ -18,8 +18,10 @@ super + a
 ## mount dmenu scripts
 super + w
     dmenuunicode
-alt + {m,u}
-    /home/darkghost/.bin/{dmenumount, dmenuunmount}
+alt + m
+    /home/darkghost/.bin/dmenumount
+alt + u
+    /home/darkghost/.bin/dmenuunmount
 XF86AudioLowerVolume
     pactl set-sink-volume 0 -5%
 XF86AudioRaiseVolume
