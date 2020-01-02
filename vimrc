@@ -46,6 +46,7 @@ Plug 'dylanaraps/wal.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jreybert/vimagit'
 Plug 'davidhalter/jedi-vim'
+Plug 'justmao945/vim-clang'
 let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
@@ -422,6 +423,10 @@ set foldopen=all " Open folds if you touch them in any way
 " c
 autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
+
+"vim-clang
+
+let g:clang_format_auto = 1
 
 " jedi-vim"
 let g:jedi#auto_initialization = 1
