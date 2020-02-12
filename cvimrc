@@ -46,9 +46,10 @@ map <Leader>x :restore<Space>
 " This remaps the default 'j' mapping
 map j scrollUp
 
+unmap b
 " You can use <Space>, which is interpreted as a
 " literal " " character, to enter buffer completion mode
-map gb :buffer<Space>
+map b :buffer<Space>
 
 " This unmaps the default 'k' mapping
 unmap k
@@ -98,7 +99,7 @@ echo(link) -> {{
 }}
 map <C-f> createScriptHint(echo)
 
-let configpath = '/path/to/your/.cvimrc'
+let configpath = '~/.cvimrc'
 set localconfig " Update settings via a local file (and the `:source` command) rather
                 " than the default options page in chrome
 " As long as localconfig is set in the .cvimrc file. cVim will continue to read
