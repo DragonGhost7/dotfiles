@@ -46,7 +46,7 @@ Plug 'dylanaraps/wal.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jreybert/vimagit'
 Plug 'davidhalter/jedi-vim'
-Plug 'justmao945/vim-clang'
+Plug 'ycm-core/YouCompleteMe'
 let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
@@ -324,9 +324,9 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 "" fzf.vim
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+""set wildmode=list:longest,list:full
+""set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+""let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
 " The Silver Searcher
 if executable('ag')
@@ -342,7 +342,7 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 endif
 
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>b :buffers<CR>
 nnoremap <silent> <leader>e :FZF -m<CR>
 
 " }}}
@@ -427,6 +427,20 @@ autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
 "vim-clang
 
 let g:clang_format_auto = 1
+
+" YCM"
+
+let g:ycm_auto_trigger = 1
+let g:ycm_python_interpreter_path = ''
+let g:ycm_python_sys_path = []
+let g:ycm_extra_conf_vim_data = [
+  \  'g:ycm_python_interpreter_path',
+  \  'g:ycm_python_sys_path'
+  \]
+let g:ycm_global_ycm_extra_conf = '~/.global_ycm_conf.py'
+let g:ycm_use_clangd = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 " jedi-vim"
 let g:jedi#auto_initialization = 1
