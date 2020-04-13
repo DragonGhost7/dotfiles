@@ -415,7 +415,7 @@ set foldclose=all " Close folds if you leave them in any way
 set foldenable " Turn on folding
 set foldlevel=0 " Autofold everything by default
 set foldmethod=marker " Fold on the marker
-set foldopen=all " Open folds if you touch them in any way
+"set foldopen=all " Open folds if you touch them in any way
 
 " }}}
 

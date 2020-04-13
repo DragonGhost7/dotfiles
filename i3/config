@@ -193,7 +193,7 @@ for_window [title="mpvfloat"] sticky enable
 
 for_window [title=".*mpv"] floating enable
 for_window [title="npm"]  layout stacking
-
+for_window [class="(?i)conky"] floating enable border none sticky enable
 
 #
 #
