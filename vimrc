@@ -343,7 +343,6 @@ endif
 
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <silent> <leader>b :buffers<CR>
-nnoremap <silent> <leader>e :FZF -m<CR>
 
 " }}}
 

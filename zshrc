@@ -4,6 +4,8 @@
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
+export SUDO_ASKPASS="/home/darkghost/.bin/rofi-askpass"
+
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
