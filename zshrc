@@ -1,9 +1,13 @@
-# Luke's config for the Zoomer Shell
 
 # Enable colors and change prompt:
 autoload -U colors && colors
-PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
+#oh-my-zsh
+ZSH_THEME="agnoster"
+plugins=(git)
+
+
+export ZSH="/home/darkghost/dotfiles/oh-my-zsh"
 export SUDO_ASKPASS="/home/darkghost/.bin/rofi-askpass"
 
 # History in cache directory:
@@ -53,13 +57,13 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # Use lf to switch directories and bind it to ctrl-o
 lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
+tmp="$(mktemp)"
+lf -last-dir-path="$tmp" "$@"
+if [ -f "$tmp" ]; then
+    dir="$(cat "$tmp")"
+    rm -f "$tmp"
+    [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+fi
 }
 bindkey -s '^o' 'lfcd\n'
 
@@ -72,5 +76,6 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 # Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source $ZSH/oh-my-zsh.sh
 eval $(thefuck --alias)
