@@ -46,7 +46,8 @@ Plug 'dylanaraps/wal.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jreybert/vimagit'
 Plug 'davidhalter/jedi-vim'
-Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clang-completer' }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
@@ -349,7 +350,7 @@ let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_mode_map = { 'passive_filetypes': ['tex'] }
+""let g:syntastic_mode_map = { 'passive_filetypes': ['tex','python'] }
 let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
 
 set statusline+=%#warningmsg#
@@ -359,7 +360,7 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 
 " }}}
 
@@ -432,13 +433,19 @@ let g:ycm_extra_conf_vim_data = [
   \  'g:ycm_python_sys_path'
   \]
 let g:ycm_global_ycm_extra_conf = '~/.global_ycm_conf.py'
+let g:ycm_auto_hover = 'CursorHold'
+nmap <leader>D <plug>(YCMHover)
+nmap <C-f> :YcmCompleter FixIt
 let g:ycm_use_clangd = 1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_echo_current_diagnostic = 1
+let g:ycm_enable_diagnostic_signs = 1
+let g:ycm_always_populate_location_list = 1
 
 " jedi-vim"
 let g:jedi#auto_initialization = 1
-let g:jedi#completions_command = "<C-Space>"
+let g:jedi#completions_command = "<C-C>"
 let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_definitions_command = "<C-d>"
 let g:jedi#documentation_command = "K"
@@ -446,7 +453,7 @@ let g:jedi#usages_command = "<leader>n"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "0"
 let g:jedi#smart_auto_mappings = 1
-let g:jedi#popup_on_dot = 1
+let g:jedi#popup_on_dot = 0
 " syntastic
 let g:syntastic_python_checkers=['python']
 "flake8
@@ -568,3 +575,4 @@ else
 endif
 
 " }}}
+
