@@ -40,24 +40,24 @@ super + {l, k}
     mortylocker { , && systemctl suspend}
 
 ## utilities
-alt + Return
-    $TERMINAL
+#alt + Return
+#    $TERMINAL
 alt + F4
     arandr
-alt + d
+#alt + d
 ##    rofi -config ~/.config/rofi/config.rasi -show run
-    /home/darkghost/.bin/appsmenu
+#    /home/darkghost/.bin/appsmenu
 #super + s
 #    killall screenkey || screenkey
 alt + Print
     /home/darkghost/.bin/screenshot
 shift + Print
     /home/darkghost/.bin/dmenurecord
-alt + c
-    /home/darkghost/.bin/camtoggle
+#alt + c
+#    /home/darkghost/.bin/camtoggle
 alt + m
     /home/darkghost/.bin/dmenumount
 alt + n
     /home/darkghost/.bin/dmenuunmount
-alt + t
+alt + l
     /home/darkghost/.bin/dmenutexdoc
