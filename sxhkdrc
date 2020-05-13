@@ -47,8 +47,8 @@ alt + F4
 alt + d
 ##    rofi -config ~/.config/rofi/config.rasi -show run
     /home/darkghost/.bin/appsmenu
-super + s
-    killall screenkey || screenkey
+#super + s
+#    killall screenkey || screenkey
 alt + Print
     /home/darkghost/.bin/screenshot
 shift + Print

@@ -12,5 +12,14 @@ mpd
 setbg /home/darkghost/.config/wall.png
 sxhkd -c /home/darkghost/.sxhkdrc &
 dunst > /dev/null 2>&1  &
+
+# i3 configs
+# exec i3
+
+# kde start
 #exec startkde
-exec i3
+
+# dwm start
+ /home/darkghost/suckless/dwm-bar/dwm_bar.sh &
+compton &
+exec dwm
