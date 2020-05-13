@@ -14,12 +14,12 @@ sxhkd -c /home/darkghost/.sxhkdrc &
 dunst > /dev/null 2>&1  &
 
 # i3 configs
-# exec i3
+ exec i3
 
 # kde start
 #exec startkde
 
 # dwm start
- /home/darkghost/suckless/dwm-bar/dwm_bar.sh &
-compton &
-exec dwm
+ # /home/darkghost/suckless/dwm-bar/dwm_bar.sh &
+# compton &
+# exec dwm
