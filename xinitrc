@@ -22,4 +22,8 @@ dunst > /dev/null 2>&1  &
 # dwm start
  /home/darkghost/suckless/dwm-bar/dwm_bar.sh &
 compton &
-exec dwm
+#exec startdwm
+
+while :; do
+    dwm || break
+done

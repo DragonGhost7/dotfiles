@@ -3,7 +3,6 @@
 #
 
 figlet WELCOME $USER -f slant  | lolcat
-
 export BROWSER="brave"
 export TERMINAL="st"
 export EDITOR="/usr/sbin/vim"
