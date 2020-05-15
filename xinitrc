@@ -24,6 +24,6 @@ dunst > /dev/null 2>&1  &
 compton &
 #exec startdwm
 
-#while :; do
-exec    dwm #|| break
-#done
+while :; do
+    dwm || break
+done
