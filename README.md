@@ -7,9 +7,14 @@ Right now present:
 - mpd configs
 - xinitrc
 - sxhkdrc
-- i3
-    - i3 config
-    - i3blocks
+- dwm
+
+
+dwm patches:
+    alpha
+    double bar
+    systray
+    gaps
 
 
 If any of them break your system don't blame me pls.
