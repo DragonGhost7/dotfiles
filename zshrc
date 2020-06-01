@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Enable colors and change prompt:
 autoload -U colors && colors
 # export SUDO_ASKPASS="/home/darkghost/.bin/rofi-askpass"
@@ -5,13 +12,11 @@ autoload -U colors && colors
 export ZSH="/home/darkghost/.oh-my-zsh"
 # PROMPT="%B%{$fg[red]%}%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}%{$reset_color%}$%b "
 
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(
 git-prompt
 )
-# source /usr/lib/zsh-git-prompt/zshrc.sh
-# RPROMPT='$(git_super_status)'
-
+source $ZSH/oh-my-zsh.sh
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
@@ -57,7 +62,6 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-source $ZSH/oh-my-zsh.sh
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
@@ -71,3 +75,6 @@ bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 eval $(thefuck --alias)
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
