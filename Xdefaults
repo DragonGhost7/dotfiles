@@ -8,10 +8,30 @@
 !! Transparency (0-1):
 *.alpha: 0.8
 !! Set a default font and font size as below:
-st.font:  Consolas-12
+st.font:  monospace-14
 !!st.cursorColor: #cee0de
 st.termname: st-256color
 !! st.borderpx: 1
+/* dwm.normbordercolor */
+dwm.normbgcolor: #222222
+/* dwm.normfgcolor */
+dwm.selbordercolor: #FF0000
+/* dwm.selbgcolor */
+/* dwm.selfgcolor */
+
+/*
+static char normbgcolor[]           = "#222222";
+static char normbordercolor[]       = "#444444";
+static char normfgcolor[]           = "#bbbbbb";
+static char selfgcolor[]            = "#eeeeee";
+static char selbordercolor[]        = "#005577";
+static char selbgcolor[]            = "#005577";
+*/
+
+
+
+
+
 
 !! gruvbox:
 *.color0: #1d2021

@@ -42,6 +42,8 @@ super + {l, k}
 ## utilities
 #alt + Return
 #    $TERMINAL
+alt + w
+	$BROWSER
 alt + F4
     arandr
 #alt + d

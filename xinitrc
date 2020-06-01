@@ -9,9 +9,9 @@
 
 mpd
 #mpDris2
+dunst > /dev/null 2>&1  &
 setbg /home/darkghost/.config/wall.png
 sxhkd -c /home/darkghost/.sxhkdrc &
-dunst > /dev/null 2>&1  &
 
 # i3 configs
 # exec i3
@@ -25,5 +25,5 @@ compton &
 #exec startdwm
 
 while :; do
-    dwm || break
+	ssh-agent dwm || break
 done

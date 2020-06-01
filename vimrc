@@ -43,10 +43,11 @@ Plug 'sheerun/vim-polyglot'
 Plug 'vim-utils/vim-man'
 Plug 'junegunn/goyo.vim'
 Plug 'dylanaraps/wal.vim'
+Plug 'morhetz/gruvbox'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jreybert/vimagit'
 Plug 'davidhalter/jedi-vim'
-Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clang-completer' }
+Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 let g:make = 'gmake'
 if exists('make')
@@ -85,7 +86,7 @@ set backspace=indent,eol,start
 set tabstop=4
 set softtabstop=0
 set shiftwidth=4
-set expandtab
+set noexpandtab
 "" Map leader to ,
 let mapleader=','
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -323,6 +324,7 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Opens a tab edit command with the path of the currently edited file filled
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+nmap <leader><leader>f gg=G
 
 " The Silver Searcher
 if executable('ag')
@@ -416,8 +418,8 @@ set foldmethod=marker " Fold on the marker
 
 " Custom configs {{{
 " c
-autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
+" autocmd FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab
+" autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab
 
 "vim-clang
 
@@ -442,6 +444,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_echo_current_diagnostic = 1
 let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_always_populate_location_list = 1
+let g:ycm_confirm_extra_conf = 0
 
 " jedi-vim"
 let g:jedi#auto_initialization = 1
@@ -567,7 +570,8 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
+" let g:airline_symbols.branch = ''
+let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
