@@ -20,7 +20,8 @@ sxhkd -c /home/darkghost/.sxhkdrc &
 #exec startkde
 
 # dwm start
- /home/darkghost/suckless/dwm-bar/dwm_bar.sh &
+ # /home/darkghost/suckless/dwm-bar/dwm_bar.sh &
+ dwmblocks &
 compton &
 #exec startdwm
 

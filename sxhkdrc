@@ -23,9 +23,9 @@ alt + m
 alt + u
     /home/darkghost/.bin/dmenuunmount
 XF86AudioLowerVolume
-    pactl set-sink-volume 0 -5%
+    pactl set-sink-volume 0 -5% ; kill -43 $(pidof dwmblocks)
 XF86AudioRaiseVolume
-    pactl set-sink-volume 0 +5%
+    pactl set-sink-volume 0 +5% ; kill -43 $(pidof dwmblocks)
 XF86AudioMute
     pactl set-sink-mute 0 toggle
 XF86AudioMicMute
