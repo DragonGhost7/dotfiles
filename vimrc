@@ -50,7 +50,7 @@ Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'do':{ -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer' }
+Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer', 'for': 'typescript'}
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 let g:make = 'gmake'
 if exists('make')
@@ -63,7 +63,6 @@ if v:version >= 703
 	Plug 'Shougo/vimshell.vim'
 endif
 
-Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
 Plug 'ludwig/split-manpage.vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 call plug#end()
@@ -296,8 +295,8 @@ noremap <Leader>gsh :Gpush<CR>
 noremap <Leader>gll :Gpull<CR>
 noremap <Leader>gs :Gstatus<CR>
 noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gdf :Gvdiff<CR>
-noremap <Leader>grm :Gremove<CR>
+noremap <Leader>gvd :Gvdiff<CR>
+noremap <Leader>gm :Gremove<CR>
 noremap <C-p>       :GFiles<CR>
 " }}}
 " session management {{{
@@ -308,6 +307,25 @@ nnoremap <leader>sc :CloseSession<CR>
 " }}}
 "Completition {{{
 fun! GoYCM()
+
+	let g:ycm_auto_trigger = 1
+	let g:ycm_python_interpreter_path = ''
+	let g:ycm_python_sys_path = []
+	let g:ycm_extra_conf_vim_data = [
+				\  'g:ycm_python_interpreter_path',
+				\  'g:ycm_python_sys_path'
+				\]
+	let g:ycm_global_ycm_extra_conf = '~/.global_ycm_conf.py'
+	let g:ycm_auto_hover = 'CursorHold'
+	let g:ycm_use_clangd = 1
+	let g:ycm_add_preview_to_completeopt = 1
+	let g:ycm_autoclose_preview_window_after_completion = 1
+	let g:ycm_echo_current_diagnostic = 1
+	let g:ycm_enable_diagnostic_signs = 1
+	let g:ycm_always_populate_location_list = 1
+	let g:ycm_confirm_extra_conf = 0
+
+
 	nmap <buffer> <leader>D <plug>(YCMHover)
 	nmap <buffer> <C-f> :YcmCompleter FixIt
 	nmap <buffer> <leader>gd :YcmCompleter GoTo <CR>
@@ -338,7 +356,7 @@ fun! GoCOC()
 	nmap <buffer> <silent> ]g <Plug>(coc-diagnostic-next)
 endfun
 
-autocmd Filetype python, cpp, cxx, h, hpp, c :call GoCOC()
+autocmd Filetype python,cpp,cxx,h,hpp,c :call GoCOC()
 " autocmd Filetype python :call GoYCM()
 " }}}
 " Tabs {{{
@@ -348,7 +366,6 @@ nnoremap <silent> <S-t> :tabnew<CR>
 nnoremap <C-Tab> :tabclose<CR>
 
 " }}}
-
 "viman {{{
 map <leader>k <Plug>(Man)
 map <C-m> <Plug>(Vman)
@@ -379,28 +396,28 @@ endif
 
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <silent> <leader>b :buffers<CR>
-
+nnoremap <C-c> <Esc>
 " }}}
 
 " syntastic {{{
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=1
-let g:syntastic_aggregate_errors = 1
-""let g:syntastic_mode_map = { 'passive_filetypes': ['tex','python'] }
-let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
+"let g:syntastic_always_populate_loc_list=1
+"let g:syntastic_error_symbol='✗'
+"let g:syntastic_warning_symbol='⚠'
+"let g:syntastic_style_error_symbol = '✗'
+"let g:syntastic_style_warning_symbol = '⚠'
+"let g:syntastic_auto_loc_list=1
+"let g:syntastic_aggregate_errors = 1
+"""let g:syntastic_mode_map = { 'passive_filetypes': ['tex','python'] }
+"let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 1
 
 " }}}
 
@@ -459,28 +476,9 @@ set foldmethod=marker " Fold on the marker
 " autocmd FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab
 " autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab
 
-"vim-clang
-
-let g:clang_format_auto = 1
 
 " YCM"
 
-let g:ycm_auto_trigger = 1
-let g:ycm_python_interpreter_path = ''
-let g:ycm_python_sys_path = []
-let g:ycm_extra_conf_vim_data = [
-			\  'g:ycm_python_interpreter_path',
-			\  'g:ycm_python_sys_path'
-			\]
-let g:ycm_global_ycm_extra_conf = '~/.global_ycm_conf.py'
-let g:ycm_auto_hover = 'CursorHold'
-let g:ycm_use_clangd = 1
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_echo_current_diagnostic = 1
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_always_populate_location_list = 1
-let g:ycm_confirm_extra_conf = 0
 
 " jedi-vim"
 " let g:jedi#auto_initialization = 1
