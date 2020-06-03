@@ -45,7 +45,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'dylanaraps/wal.vim'
 Plug 'morhetz/gruvbox'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 " Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf', { 'do':{ -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
