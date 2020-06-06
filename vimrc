@@ -112,6 +112,9 @@ if exists('$SHELL')
 else
 	set shell=/bin/sh
 endif
+set updatetime=300
+set shortmess+=c
+
 
 " session management
 let g:session_directory = "/home/darkghost/.vim/session"
@@ -343,13 +346,21 @@ fun! GoCOC()
 				\ pumvisible() ? "\<C-n>" :
 				\ <SID>check_back_space() ? "\<TAB>" :
 				\ coc#refresh()
+	if exists('*complete_info')
+		inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+	else
+		inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+	endif
 
+	autocmd User CocJumpPlaceholder call
+				\ CocActionAsync('showSignatureHelp')
 	inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 	inoremap <buffer> <silent><expr> <c-space> coc#refresh()
 	nmap <buffer> <silent> gd <Plug>(coc-definition)
 	nmap <buffer> <silent> gy <Plug>(coc-type-definition)
 	nmap <buffer> <silent> gi <Plug>(coc-implementation)
 	nmap <buffer> <silent> gr <Plug>(coc-references)
+	nmap <buffer> <leader>rn <Plug>(coc-rename)
 
 	nnoremap <buffer> <silent> K :call <SID>show_documentation()<CR>
 	nmap <buffer> <silent> [g <Plug>(coc-diagnostic-prev)
