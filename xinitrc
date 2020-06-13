@@ -6,6 +6,7 @@
 #/_/\_\_|_| |_|_|\__|
 # Init file.
 # yay
+eval $(ssh-agent)
 export $(dbus-launch --exit-with-x11)
 dunst > /dev/null 2>&1  &
 ~/.bin/setbg /home/darkghost/.config/wall.png
@@ -22,8 +23,9 @@ pulseaudio -D
 dwmblocks &
 compton &
 mpd
+mpDris2 &
 #exec startdwm
 
 while :; do
-	ssh-agent  dwm || break
+	dwm || break
 done

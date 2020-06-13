@@ -221,6 +221,12 @@ save_absolute_paths_in_playlists	"no"
 #	#mixer_control	"PCM"		# optional
 #	#mixer_index	"0"		# optional
 #}
+audio_output {
+	type		"pulse"
+		name		"pulse audio"
+##	server		"remote_server"		# optional
+##	sink		"remote_server_sink"	# optional
+}
 
 audio_output {
     type        "fifo"
@@ -293,12 +299,6 @@ audio_output {
 #
 # An example of a pulseaudio output (streaming to a remote pulseaudio server)
 #
-audio_output {
-	type		"pulse"
-	name		"Pulse"
-##	server		"remote_server"		# optional
-##	sink		"remote_server_sink"	# optional
-}
 #
 # An example of a winmm output (Windows multimedia API).
 #

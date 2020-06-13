@@ -14,6 +14,9 @@ super + o
     /home/darkghost/.bin/dmenuplaylist
 super + a
     /home/darkghost/.bin/dmenusong
+super + alt + p
+	/home/darkghost/.bin/dmenuchoseplayer
+
 
 ## mount dmenu scripts
 super + w
@@ -37,7 +40,7 @@ XF86Calculator
 
 ## lockscreen
 super + {l, k}
-    mortylocker { , && suspend}
+    mortylocker { , && echo -n "mem" | sudo tee  /sys/power/state}
 
 ## utilities
 #alt + Return

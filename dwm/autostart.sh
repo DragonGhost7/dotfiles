@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# ~/.bin/setbg /home/darkghost/.config/wall.png
-# xrdb load  $HOME/.Xdefaults
-# dwmblocks > ~/err.log
-pidof -x spotifyup >/dev/null 2>&1 || spotifyup &
+pidof -x spotifup >/dev/null 2>&1 || spotifup &
+pidof -x mpdup >/dev/null 2>&1 || mpdup >/dev/null 2>&1 &
+#its literally just checking when spotify music changes
