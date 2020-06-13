@@ -1,5 +1,7 @@
 # My dotfiles
 
+This is master branch, all here should work, please dont use `i3` its abandonned and pretty much broken
+
 Right now present:
 - Xdefaults
 - vimrc
