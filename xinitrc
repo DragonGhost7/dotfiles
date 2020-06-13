@@ -6,20 +6,26 @@
 #/_/\_\_|_| |_|_|\__|
 # Init file.
 # yay
-
-mpd
-#mpDris2
-setbg /home/darkghost/.config/wall.png
-sxhkd -c /home/darkghost/.sxhkdrc &
+eval $(ssh-agent)
+export $(dbus-launch --exit-with-x11)
 dunst > /dev/null 2>&1  &
+~/.bin/setbg /home/darkghost/.config/wall.png
+sxhkd -c /home/darkghost/.sxhkdrc &
 
+xrdb load  $HOME/.Xdefaults
 # i3 configs
 # exec i3
 
 # kde start
 #exec startkde
-
+pulseaudio -D
 # dwm start
- /home/darkghost/suckless/dwm-bar/dwm_bar.sh &
+dwmblocks &
 compton &
-exec dwm
+mpd
+mpDris2 &
+#exec startdwm
+
+while :; do
+	dwm || break
+done

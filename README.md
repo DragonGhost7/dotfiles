@@ -1,17 +1,24 @@
-My dotfiles
+# My dotfiles
 
 Right now present:
 - Xdefaults
 - vimrc
+- zshrc + oh-my-zsh
 - bashrc
 - mpd configs
 - xinitrc
 - sxhkdrc
-- i3
-    - i3 config
-    - i3blocks
+- dwm
+![ScreenShot](screenshot.png)
 
+## dwm autoexec folder
 
-If any of them break your system don't blame me pls.
+Inside you will find my statusbar updaters ( for my dwmblocks build )
+
+## bin
+
+My sctipts and apps, dont use a lot of them. Note the `statusbar` folder with all scripts for dwmblocks
+
+**If any of them break your system don't blame me pls.**
 
 Have fun

@@ -47,7 +47,7 @@ flags = [
 '-Wno-long-long',
 '-Wno-variadic-macros',
 '-Wno-unused-parameter',
-'-Wnoout-of-line-declaration',
+# '-Wnoout-of-line-declaration',
 '-fexceptions',
 '-DNDEBUG',
 # You 100% do NOT need -DUSE_CLANG_COMPLETER and/or -DYCM_EXPORT in your flags;

@@ -1,3 +1,4 @@
+#!/bin/bash
 #  _               _
 # | |__   __ _ ___| |__  _ __ ___
 # | '_ \ / _` / __| '_ \| '__/ __|
@@ -143,8 +144,6 @@ complete -cf sudo
 
 
 
-#export PATH=/usr/bin:$PATH
-#export PATH=/usr/sbin:$PATH
 export PATH=$PATH:/home/darkghost/.bin
 export PATH=$PATH:/home/darkghost/mutt-wizard/bin
 
