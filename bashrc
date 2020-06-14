@@ -25,13 +25,13 @@ set -o vi
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
-# (cat /home/darkghost/.cache/wal/sequences &)
+# (cat /home/$USER/.cache/wal/sequences &)
 
 # Alternative (blocks terminal for 0-3ms)
 
 # To add support for TTYs this line can be optionally added.
 #source ~/.cache/wal/colors-tty.sh
-#source /home/darkghost/nerd-fonts/bin/scripts/lib/i_all.sh
+#source /home/$USER/nerd-fonts/bin/scripts/lib/i_all.sh
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -144,7 +144,7 @@ complete -cf sudo
 
 
 
-export PATH=$PATH:/home/darkghost/.bin
-export PATH=$PATH:/home/darkghost/mutt-wizard/bin
+export PATH=$PATH:/home/$USER/.bin
+export PATH=$PATH:/home/$USER/mutt-wizard/bin
 
 eval "$(thefuck --alias)"
