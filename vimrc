@@ -8,7 +8,7 @@
 set nocompatible               " Be iMproved
 " PLUGIN {{{
 
-let vimplug_exists=expand('/home/darkghost/.vim/autoload/plug.vim')
+let vimplug_exists=expand('/home/$USER/.vim/autoload/plug.vim')
 
 
 if !filereadable(vimplug_exists)
@@ -18,14 +18,14 @@ if !filereadable(vimplug_exists)
 	endif
 	echo "Installing Vim-Plug..."
 	echo ""
-	silent !\curl -fLo /home/darkghost/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	silent !\curl -fLo /home/$USER/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	let g:not_finish_vimplug = "yes"
 
 	autocmd VimEnter * PlugInstall
 endif
 
 " Required:
-call plug#begin(expand('/home/darkghost/.vim/plugged'))
+call plug#begin(expand('/home/$USER/.vim/plugged'))
 
 "*****************************************************************************
 "" Plug install packages
@@ -117,7 +117,7 @@ set shortmess+=c
 
 
 " session management
-let g:session_directory = "/home/darkghost/.vim/session"
+let g:session_directory = "/home/$USER/.vim/session"
 let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1

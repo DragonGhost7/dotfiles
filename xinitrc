@@ -9,8 +9,8 @@
 eval $(ssh-agent)
 export $(dbus-launch --exit-with-x11)
 dunst > /dev/null 2>&1  &
-~/.bin/setbg /home/darkghost/.config/wall.png
-sxhkd -c /home/darkghost/.sxhkdrc &
+~/.bin/setbg /home/$USER/.config/wall.png
+sxhkd -c /home/$USER/.sxhkdrc &
 
 xrdb load  $HOME/.Xdefaults
 # i3 configs

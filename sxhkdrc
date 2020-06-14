@@ -7,24 +7,24 @@
 # shortcut configs because i3 cant do anything by itself
 
 super + {b,n,p}
-    /home/darkghost/.bin/musicctl.sh  {b, n, p}
+    /home/$USER/.bin/musicctl.sh  {b, n, p}
 super + {e,d}
-    /home/darkghost/.bin/volumectl.py {+5%,-5%}
+    /home/$USER/.bin/volumectl.py {+5%,-5%}
 super + o
-    /home/darkghost/.bin/dmenuplaylist
+    /home/$USER/.bin/dmenuplaylist
 super + a
-    /home/darkghost/.bin/dmenusong
+    /home/$USER/.bin/dmenusong
 super + alt + p
-	/home/darkghost/.bin/dmenuchoseplayer
+	/home/$USER/.bin/dmenuchoseplayer
 
 
 ## mount dmenu scripts
 super + w
     dmenuunicode
 alt + m
-    /home/darkghost/.bin/dmenumount
+    /home/$USER/.bin/dmenumount
 alt + u
-    /home/darkghost/.bin/dmenuunmount
+    /home/$USER/.bin/dmenuunmount
 XF86AudioLowerVolume
     pactl set-sink-volume  alsa_output.pci-0000_00_1b.0.analog-stereo -5% ; kill -43 $(pidof dwmblocks)
 XF86AudioRaiseVolume
@@ -51,18 +51,18 @@ alt + F4
     arandr
 #alt + d
 ##    rofi -config ~/.config/rofi/config.rasi -show run
-#    /home/darkghost/.bin/appsmenu
+#    /home/$USER/.bin/appsmenu
 #super + s
 #    killall screenkey || screenkey
 alt + Print
-    /home/darkghost/.bin/screenshot
+    /home/$USER/.bin/screenshot
 shift + Print
-    /home/darkghost/.bin/dmenurecord
+    /home/$USER/.bin/dmenurecord
 #alt + c
-#    /home/darkghost/.bin/camtoggle
+#    /home/$USER/.bin/camtoggle
 alt + m
-    /home/darkghost/.bin/dmenumount
+    /home/$USER/.bin/dmenumount
 alt + n
-    /home/darkghost/.bin/dmenuunmount
+    /home/$USER/.bin/dmenuunmount
 #alt + t
-#    /home/darkghost/.bin/dmenutexdoc
+#    /home/$USER/.bin/dmenutexdoc
