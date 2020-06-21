@@ -64,7 +64,7 @@ map <C-h> :set hud!<CR>
 map <C-i> :set numerichints!<CR>
 
 map <C-u> rootFrame
-map <M-h> previousTab
+" map <M-h> previousTab
 map <C-d> scrollPageDown
 map <C-e> scrollPageUp
 iunmap <C-y>
@@ -91,7 +91,7 @@ echo(link) -> {{
 }}
 map <C-f> createScriptHint(echo)
 
-let configpath = '/home/$USER/.cvimrc'
+let configpath = '~/.cvimrc'
 set localconfig " Update settings via a local file (and the `:source` command) rather
                 " than the default options page in chrome
 " As long as localconfig is set in the .cvimrc file. cVim will continue to read
