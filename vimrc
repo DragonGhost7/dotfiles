@@ -32,6 +32,9 @@ call plug#begin(expand('/home/$USER/.vim/plugged'))
 "*****************************************************************************
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'vimwiki/vimwiki'
+Plug 'mattn/calendar-vim'
+Plug 'mipmip/vim-scimark'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
@@ -70,6 +73,7 @@ call plug#end()
 " }}}
 
 filetype plugin indent on
+set smartindent
 
 
 "" Basic Setup {{{
@@ -91,7 +95,7 @@ set shiftwidth=4
 set noexpandtab
 "" Map leader to ,
 let mapleader=','
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "" Enable hidden buffers
 set hidden
 
@@ -382,7 +386,33 @@ map <leader>k <Plug>(Man)
 map <C-m> <Plug>(Vman)
 
 "}}}
+" Vimwiki {{{
+						" \'custom_wiki2html':'/home/darkghost/.vim/plugged/vimwiki/autoload/vimwiki/customwiki2html.sh',
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+			\'syntax': 'markdown',
+			\'ext': '.md',
+			\'custom_wiki2html': '/home/darkghost/.gem/ruby/2.7.0/bin/vimwiki_markdown',
+			\ 'html_filename_parameterization': 1,
+			\ 'template_path': '~/vimwiki/templates',
+			\'path_html': '~/vimwiki/site_html/'}]
+function! ToggleCalendar()
+	execute ":Calendar"
+	if exists("g:calendar_open")
+		if g:calendar_open == 1
+			execute "q"
+			unlet g:calendar_open
+		else
+			g:calendar_open = 1
+		end
+	else
+		let g:calendar_open = 1
+	end
+endfunction
+:autocmd FileType vimwiki nmap <leader>ca :call ToggleCalendar()<CR>
 
+
+
+"}}}
 " Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
 " Opens an edit command with the path of the currently edited file filled in
@@ -486,6 +516,11 @@ set foldmethod=marker " Fold on the marker
 " c
 " autocmd FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab
 " autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab
+
+"Scimark
+
+let g:scimCommand = '/usr/bin/sc-im'
+
 
 
 " YCM"
@@ -623,4 +658,3 @@ let g:airline_symbols.maxlinenr = ''
 
 
 " }}}
-

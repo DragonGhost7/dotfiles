@@ -1,5 +1,32 @@
 # My dotfiles
 
+## Installation
+
+For installation of dotfiles, I use `bashdot`. Written in bash cli utility to install dotfiles.
+
+Steps then would be to first clone this repo:
+
+```
+cd ~/
+git clone https://github.com/DragonGhost7/dotfiles.git
+```
+
+Then install bashdot from their github because it's literally one file, it doesnt need a package.
+
+```
+curl -s https://raw.githubusercontent.com/bashdot/bashdot/master/bashdot > bashdot
+sudo mv bashdot /usr/local/bin
+sudo chmod a+x /usr/local/bin/bashdot
+```
+( yanked from their github please dont sue me ).
+
+Then proceed with installation of the dotfiles directory.
+
+```
+bashdot install dotfiles
+```
+It should create symlinks for all the files in the repo to their respective places in the home directory.
+
 Right now present:
 - Xdefaults
 - vimrc
