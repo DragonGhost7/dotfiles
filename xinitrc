@@ -13,18 +13,13 @@ dunst > /dev/null 2>&1  &
 sxhkd -c /home/$USER/.sxhkdrc &
 
 xrdb load  $HOME/.Xdefaults
-# i3 configs
-# exec i3
 
-# kde start
-#exec startkde
 pulseaudio -D
 # dwm start
 dwmblocks &
 compton &
 mpd
 mpDris2 &
-#exec startdwm
 
 while :; do
 	dwm || break

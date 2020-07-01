@@ -12,6 +12,8 @@ super + {e,d}
     /home/$USER/.bin/volumectl.py {+5%,-5%}
 super + o
     /home/$USER/.bin/dmenuplaylist
+super + O
+	xclip -o | xargs -r /home/$USER/.bin/linkhandler
 super + a
     /home/$USER/.bin/dmenusong
 super + alt + p
