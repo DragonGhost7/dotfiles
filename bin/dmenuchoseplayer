@@ -6,5 +6,6 @@ p=$(playerctl -l | $dmenu)
 if [ $p ];then
 echo $p > ~/.cache/current_player
 fi
+kill -45 $(pidof "dwmblocks")
 # playerctl -p $(cat ~/.cache/current_player) play
 
