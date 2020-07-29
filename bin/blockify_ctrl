@@ -23,6 +23,6 @@ case "$1" in
 		signal='RTMIN+12';;   # Toggle play interlude song
 	itr|itoggleresume)
 		signal='RTMIN+13';;   # Toggle interlude resume
-	*) echo "Usage: bb ( b[lock] | u[nblock] | p[revious] | n[ext] | t[oggle] | t[oggle]b[lock] |...)" && return 0;;
+	*) echo "Usage: bb ( b[lock] | u[nblock] | p[revious] | n[ext] | t[oggle] | t[oggle]b[lock] |...)";;
 esac
 pkill --signal "$signal" -f 'python.*blockify'

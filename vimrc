@@ -34,6 +34,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/calendar-vim'
+Plug 'kjwon15/vim-transparent'
 Plug 'mipmip/vim-scimark'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -68,6 +69,10 @@ endif
 
 Plug 'ludwig/split-manpage.vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+if (has("nvim"))
+	Plug 'norcalli/nvim-colorizer.lua'
+endif
+
 call plug#end()
 
 " }}}
@@ -98,6 +103,8 @@ let mapleader=','
 " autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "" Enable hidden buffers
 set hidden
+
+"" Clipboard highjacking
 
 "" Searching
 set hlsearch
@@ -142,11 +149,19 @@ autocmd BufWritePre * %s/\s\+$//e
 syntax on
 set ruler
 set number relativenumber
-
+if (has("nvim"))
+	set termguicolors
+	set background=dark
+	colorscheme gruvbox
+	lua require'colorizer'.setup()
+endif
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-	colorscheme wal
+	" colorscheme wal
 endif
+" set background=dark
+" autocmd vimenter * colorscheme gruvbox
+" hi Normal guibg=NONE ctermbg=NONE
 
 set mousemodel=popup
 set t_Co=256
@@ -504,9 +519,8 @@ vnoremap K :m '<-2<CR>gv=gv
 " }}}
 
 " Folding {{{
-set foldclose=all " Close folds if you leave them in any way
+" set foldclose=all " Close folds if you leave them in any way
 set foldenable " Turn on folding
-set foldlevel=0 " Autofold everything by default
 set foldmethod=marker " Fold on the marker
 "set foldopen=all " Open folds if you touch them in any way
 

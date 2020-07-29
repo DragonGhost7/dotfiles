@@ -16,6 +16,8 @@ super + O
 	xclip -o | xargs -r /home/$USER/.bin/linkhandler
 super + a
     /home/$USER/.bin/dmenusong
+super + s
+	/home/$USER/.bin/soundboard
 super + alt + p
 	/home/$USER/.bin/dmenuchoseplayer
 
