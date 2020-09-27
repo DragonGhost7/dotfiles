@@ -17,7 +17,7 @@ xrdb load  $HOME/.Xdefaults
 pulseaudio -D
 # dwm start
 dwmblocks &
-compton &
+picom &
 mpd
 mpDris2 &
 

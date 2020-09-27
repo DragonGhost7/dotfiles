@@ -8,13 +8,13 @@ dwm_battery () {
     # Change BAT1 to whatever your battery is identified as. Typically BAT0 or BAT1
     CHARGE=$(cat /sys/class/power_supply/BAT0/capacity)
     STATUS=$(cat /sys/class/power_supply/BAT0/status)
-
+	TIME=$(acpi -b | awk '{print $5}' | cut -d":" -f1,2 | head -n1)
     printf "%s" "$SEP1"
     if [ "$IDENTIFIER" = "unicode" ]; then
         if [ "$STATUS" = "Charging" ]; then
             printf "🔌 %s%% %s" "$CHARGE" "$STATUS"
         else
-            printf "🔋 %s%% %s" "$CHARGE" "$STATUS"
+            printf "🔋 %s%% %s : %s" "$CHARGE" "$STATUS" "$TIME"
         fi
     else
         printf "BAT %s%% %s" "$CHARGE" "$STATUS"
