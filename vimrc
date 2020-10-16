@@ -157,7 +157,7 @@ if (has("nvim"))
 endif
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-	" colorscheme wal
+	colorscheme wal
 endif
 " set background=dark
 " autocmd vimenter * colorscheme gruvbox
