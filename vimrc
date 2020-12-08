@@ -142,6 +142,9 @@ let g:session_command_aliases = 1
 autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
 autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
 
+" Make calcurse files markdown highlighted
+autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+
 " Spellcheck
 map <F6> :setlocal spell! <CR>
 

@@ -1,0 +1,8 @@
+for x in /home/darkghost/.vdirsyncer/tasks/TXkA6tTBSPOn-nwzvSWp_-o7yJJSFHJj/b1767795-bef9-4de3-b5a2-889438bcca07.ics
+/home/darkghost/.vdirsyncer/tasks/TXkA6tTBSPOn-nwzvSWp_-o7yJJSFHJj/4967ae63-6597-4276-a7ae-c7f2d0557999.ics
+/home/darkghost/.vdirsyncer/tasks/TXkA6tTBSPOn-nwzvSWp_-o7yJJSFHJj/9002d2cc-b13e-46c9-b9bf-e8442a4ce1f7.ics
+/home/darkghost/.vdirsyncer/tasks/TXkA6tTBSPOn-nwzvSWp_-o7yJJSFHJj/54a72086-360b-4356-8c92-1c126d7e5d9b.ics
+/home/darkghost/.vdirsyncer/tasks/TXkA6tTBSPOn-nwzvSWp_-o7yJJSFHJj/fc4f633d-9b45-4e49-9f4b-f5421cf29a24.ics
+/home/darkghost/.vdirsyncer/calendar/I1Ep9en88Fvk9JCJT3mouC_BecKLoAJL/55cafe92-6abe-4733-afed-dafabd680cb3.ics
+/home/darkghost/.vdirsyncer/calendar/I1Ep9en88Fvk9JCJT3mouC_BecKLoAJL/53d1089d7206b345a2c8a266156d4e1f6e4ade43.ics
+/home/darkghost/.vdirsyncer/calendar/I1Ep9en88Fvk9JCJT3mouC_BecKLoAJL/983cdaa8-8671-4918-a744-dcc9581d0a19.ics; do calcurse -i /home/darkghost/.vdirsyncer/calendar/I1Ep9en88Fvk9JCJT3mouC_BecKLoAJL/983cdaa8-8671-4918-a744-dcc9581d0a19.ics; done
