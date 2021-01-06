@@ -146,5 +146,8 @@ complete -cf sudo
 
 export PATH=$PATH:/home/$USER/.bin
 export PATH=$PATH:/home/$USER/mutt-wizard/bin
+export PATH=$PATH:/opt/texlive/2020/bin/x86_64-linux
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
 
 eval "$(thefuck --alias)"

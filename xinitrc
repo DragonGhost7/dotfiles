@@ -9,18 +9,20 @@
 eval $(ssh-agent)
 export $(dbus-launch --exit-with-x11)
 dunst > /dev/null 2>&1  &
-~/.bin/setbg /home/$USER/.config/wall.png
 sxhkd -c /home/$USER/.sxhkdrc &
-
+~/.bin/setbg /home/$USER/.config/wall.png
 xrdb load  $HOME/.Xdefaults
+
 
 pulseaudio -D
 # dwm start
+mpd
+echo "mpd" > ~/.cache/current_player
 dwmblocks &
 picom &
-mpd
 mpDris2 &
 
+#startplasma-x11
 while :; do
 	dwm || break
 done
