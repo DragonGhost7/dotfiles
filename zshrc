@@ -18,7 +18,7 @@ fi
 # Enable colors and change prompt:
 autoload -U colors && colors
 # export SUDO_ASKPASS="/home/$USER/.bin/rofi-askpass"
-
+export COLORTERM="truecolor"
 export ZSH="/home/$USER/.oh-my-zsh"
 # PROMPT="%B%{$fg[red]%}%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}%{$reset_color%}$%b "
 
