@@ -21,7 +21,7 @@ echo "mpd" > ~/.cache/current_player
 dwmblocks &
 picom &
 mpDris2 &
-
+xrandr --setprovideroutputsource nouveau Intel
 #startplasma-x11
 while :; do
 	dwm || break
