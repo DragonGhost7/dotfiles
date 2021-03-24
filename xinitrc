@@ -13,6 +13,7 @@ sxhkd -c /home/$USER/.sxhkdrc &
 ~/.bin/setbg /home/$USER/.config/wall.png
 xrdb load  $HOME/.Xdefaults
 
+unclutter -idle 3 &
 
 pulseaudio -D
 # dwm start
@@ -20,7 +21,8 @@ mpd
 echo "mpd" > ~/.cache/current_player
 dwmblocks &
 picom &
-mpDris2 &
+# mpDris2 &
+dex -a &
 xrandr --setprovideroutputsource nouveau Intel
 #startplasma-x11
 while :; do
