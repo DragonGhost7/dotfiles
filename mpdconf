@@ -212,15 +212,16 @@ save_absolute_paths_in_playlists	"no"
 #
 # An example of an ALSA output:
 #
-#audio_output {
-#	type		"alsa"
-#name		"ALSA"
-#	#device		"hw:0,0"	# optional
-#	#mixer_type      "hardware"	# optional
+# audio_output {
+	# type		"alsa"
+# name		"alsa"
+# format       "44100:16:2"
+# device		"default:CARD=PCH"	# optional
+# mixer_type      "software"	# optional
 #	#mixer_device	"default"	# optional
 #	#mixer_control	"PCM"		# optional
 #	#mixer_index	"0"		# optional
-#}
+# }
 audio_output {
 	type		"pulse"
 		name		"pulse audio"

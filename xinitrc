@@ -14,12 +14,12 @@ sxhkd -c /home/$USER/.sxhkdrc &
 xrdb load  $HOME/.Xdefaults
 
 unclutter -idle 3 &
-
-pulseaudio -D
+# pulseaudio -D
 # dwm start
 mpd
 echo "mpd" > ~/.cache/current_player
 dwmblocks &
+# picom -b --unredir-if-possible --backend xr_glx_hybrid --vsync --use-damage --glx-no-stencil &
 picom &
 # mpDris2 &
 dex -a &
