@@ -113,6 +113,7 @@ fi
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # some more ls aliases
 #alias la='ls -A'
@@ -146,6 +147,7 @@ complete -cf sudo
 
 export PATH=$PATH:/home/$USER/.bin
 export PATH=$PATH:/home/$USER/mutt-wizard/bin
+export PATH=$PATH:/home/$USER/projects/flutter/bin
 export PATH=$PATH:/opt/texlive/2020/bin/x86_64-linux
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null

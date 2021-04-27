@@ -24,6 +24,7 @@ picom &
 # mpDris2 &
 dex -a &
 xrandr --setprovideroutputsource nouveau Intel
+xrandr | grep "DP-1-1-3 connected" && ./.screenlayout/default.sh
 #startplasma-x11
 while :; do
 	dwm || break

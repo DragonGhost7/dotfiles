@@ -1,0 +1,5 @@
+#!/bin/bash
+
+curl https://www.doi2bib.org/2/doi2bib\?id\=$1 | xclip
+xclip -o | grep -q "Not Found" && echo "Fetch failed, check doi" || echo "Success, bibdata fetched"
+
