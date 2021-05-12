@@ -35,12 +35,9 @@ Right now present:
 - mpd configs
 - xinitrc
 - sxhkdrc
-- dwm
+- awesome
 ![ScreenShot](screenshot.png)
 
-## dwm autoexec folder
-
-Inside you will find my statusbar updaters ( for my dwmblocks build )
 
 ## bin
 

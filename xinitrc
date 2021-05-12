@@ -7,25 +7,19 @@
 # Init file.
 # yay
 eval $(ssh-agent)
-export $(dbus-launch --exit-with-x11)
-dunst > /dev/null 2>&1  &
+# export $(dbus-launch --exit-with-x11)
+# dunst > /dev/null 2>&1  &
 sxhkd -c /home/$USER/.sxhkdrc &
 ~/.bin/setbg /home/$USER/.config/wall.png
 xrdb load  $HOME/.Xdefaults
 
 unclutter -idle 3 &
-# pulseaudio -D
-# dwm start
 mpd
 echo "mpd" > ~/.cache/current_player
-dwmblocks &
 # picom -b --unredir-if-possible --backend xr_glx_hybrid --vsync --use-damage --glx-no-stencil &
 picom &
 # mpDris2 &
 dex -a &
-xrandr --setprovideroutputsource nouveau Intel
+xrandr --setprovideroutputsource NVIDIA-G0 modesetting
 xrandr | grep "DP-1-1-3 connected" && ./.screenlayout/default.sh
-#startplasma-x11
-while :; do
-	dwm || break
-done
+exec awesome
