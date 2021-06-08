@@ -21,5 +21,5 @@ picom &
 # mpDris2 &
 dex -a &
 xrandr --setprovideroutputsource NVIDIA-G0 modesetting
-xrandr | grep "DP-1-1-3 connected" && ./.screenlayout/default.sh
+xrandr | grep "DP-1-3.3 connected" && ./.screenlayout/default.sh
 exec awesome
