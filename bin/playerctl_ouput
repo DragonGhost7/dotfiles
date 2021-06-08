@@ -1,0 +1,13 @@
+#!/bin/sh
+player=$(cat ~/.cache/current_player)
+check=0
+for p in $(playerctl -l) ;do
+	if  [ "$player" = "$p" ] ;then
+		check=1
+	fi
+done
+if [ $check = 0 ];then
+	return 1
+else
+	playerctl -p $(cat ~/.cache/current_player)  -f '{{status}};{{xesam:artist}};{{xesam:title}};{{mpris:artUrl}}' metadata
+fi

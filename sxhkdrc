@@ -23,8 +23,8 @@ super + alt + p
 
 
 ## mount dmenu scripts
-# super + w
-    # dmenuunicode
+super + w
+    dmenuunicode
 alt + m
     /home/$USER/.bin/dmenumount
 alt + u
@@ -49,8 +49,8 @@ super + {l, k}
     mortylocker { , && echo -n "mem" | sudo tee  /sys/power/state}
 
 ## utilities
-#alt + Return
-#    $TERMINAL
+alt + Return
+   $TERMINAL
 alt + w
 	$BROWSER
 alt + F12

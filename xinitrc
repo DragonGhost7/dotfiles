@@ -7,7 +7,7 @@
 # Init file.
 # yay
 eval $(ssh-agent)
-# export $(dbus-launch --exit-with-x11)
+export $(dbus-launch --exit-with-x11)
 # dunst > /dev/null 2>&1  &
 sxhkd -c /home/$USER/.sxhkdrc &
 ~/.bin/setbg /home/$USER/.config/wall.png

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mpc status | grep -Po "(?<=\[).*(?=\])" || echo "MPD error: Connection refused"
