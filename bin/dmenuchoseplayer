@@ -16,6 +16,5 @@ done
 if [ $player ];then
 echo $player > ~/.cache/current_player
 fi
-kill -45 $(pidof "dwmblocks")
-# playerctl -p $(cat ~/.cache/current_player) play
+~/.bin/cache_spotifyd.sh &
 

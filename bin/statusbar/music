@@ -1,19 +1,11 @@
 #!/bin/sh
 player=$(cat ~/.cache/current_player)
-# check=0
-# for p in $(playerctl -l) ;do
-# 	if  [ "$player" = "$p" ] ;then
-# 		check=1
-# 	fi
-# done
-# if [ $check = 0 ];then
-# 	echo " Nothing playing in $(cat ~/.cache/current_player) "
-# else
-# 	playerctl -p $(cat ~/.cache/current_player) metadata -f "{{status}} {{artist}} - {{title}}" | sed  "s/Paused/⏸ /g" | sed  "s/Playing/▶/g";
-# fi
 
-
+if [ $player = 'spotifyd' ]; then
+	cat ~/.cache/spotifyd/metadata
+else
 playerctl -p $player metadata --format 'Album    {{album}}
 AlbumArtist     {{albumartist}}
 Artist    {{artist}}
 Title    {{title}}'
+fi

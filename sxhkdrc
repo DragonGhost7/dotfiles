@@ -25,7 +25,7 @@ super + alt + p
 ## mount dmenu scripts
 super + w
     dmenuunicode
-alt + m
+alt + M
     /home/$USER/.bin/dmenumount
 alt + u
     /home/$USER/.bin/dmenuunmount
@@ -66,9 +66,5 @@ shift + Print
     /home/$USER/.bin/dmenurecord
 #alt + c
 #    /home/$USER/.bin/camtoggle
-alt + m
-    /home/$USER/.bin/dmenumount
-alt + n
-    /home/$USER/.bin/dmenuunmount
 #alt + t
 #    /home/$USER/.bin/dmenutexdoc

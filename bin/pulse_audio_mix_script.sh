@@ -21,8 +21,8 @@
 
 
 
-microphone="alsa_input.pci-0000_00_1b.0.analog-stereo"
-speakers="alsa_output.pci-0000_00_1b.0.analog-stereo"
+microphone="alsa_input.pci-0000_00_1f.3.analog-stereo"
+speakers="alsa_output.pci-0000_00_1f.3.analog-stereo"
 
 echo "Setting up echo cancellation"
 pactl load-module module-echo-cancel use_master_format=1 aec_method=webrtc \

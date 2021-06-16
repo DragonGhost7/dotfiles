@@ -7,7 +7,7 @@ x=0
 y=0
 env = os.environ
 env['LANG'] = 'en_US'
-app = '"Spotify"'
+app = '"librespot"'
 pactl = subprocess.check_output(['pactl', 'list', 'sink-inputs'], env=env).decode().strip().split()
 if app in pactl:
     for e in pactl:
@@ -22,7 +22,7 @@ if app in pactl:
             volume = pactl[y + 3]
     sink_id = sink_id[1: ]
     volume = volume[ : -1 ]
-    if int(volume) < 100:
+    if int(volume) < 140:
         subprocess.run(['pactl', 'set-sink-input-volume', sink_id, sys.argv[1]])
 else:
     print("no spotify")

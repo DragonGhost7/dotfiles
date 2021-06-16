@@ -10,7 +10,9 @@ eval $(ssh-agent)
 export $(dbus-launch --exit-with-x11)
 # dunst > /dev/null 2>&1  &
 sxhkd -c /home/$USER/.sxhkdrc &
-xrdb load  $HOME/.Xdefaults
+
+pipewire &
+pipewire-pulse &
 
 unclutter -idle 3 &
 mpd
@@ -20,6 +22,7 @@ picom &
 # mpDris2 &
 dex -a &
 xrandr --setprovideroutputsource NVIDIA-G0 modesetting
-xrandr | grep "DP-1-3.3 connected" && ./.screenlayout/default.sh
+# xrandr | grep "DP-1-3.3 connected" && ./.screenlayout/default.sh
 ~/.bin/setbg /home/$USER/.config/wall.png
+xrdb load  $HOME/.Xdefaults
 exec awesome
