@@ -153,3 +153,4 @@ export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
 eval "$(thefuck --alias)"
+. "$HOME/.cargo/env"

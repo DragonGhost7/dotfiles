@@ -162,6 +162,7 @@ let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
 	colorscheme wal
 endif
+hi Pmenu ctermbg=black ctermfg=white
 " set background=dark
 " autocmd vimenter * colorscheme gruvbox
 " hi Normal guibg=NONE ctermbg=NONE
@@ -389,7 +390,7 @@ fun! GoCOC()
 	nmap <buffer> <silent> ]g <Plug>(coc-diagnostic-next)
 endfun
 
-autocmd Filetype python,cpp,cxx,h,hpp,c :call GoCOC()
+autocmd Filetype python,cpp,cxx,h,hpp,c,rust :call GoCOC()
 " autocmd Filetype python :call GoYCM()
 " }}}
 " Tabs {{{

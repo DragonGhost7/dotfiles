@@ -20,11 +20,13 @@ super + s
 	/home/$USER/.bin/soundboard
 super + alt + p
 	/home/$USER/.bin/dmenuchoseplayer
+alt + c
+	clipmenu
 
 
 ## mount dmenu scripts
-# super + w
-    # dmenuunicode
+super + w
+    dmenuunicode
 alt + m
     /home/$USER/.bin/dmenumount
 alt + u
