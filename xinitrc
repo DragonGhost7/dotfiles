@@ -21,15 +21,15 @@ echo "mpd" > ~/.cache/current_player
 dwmblocks &
 climpenud &
 # picom -b --unredir-if-possible --backend xr_glx_hybrid --vsync --use-damage --glx-no-stencil &
-picom &
+# picom &
 # mpDris2 &
 dex -a &
 
-descrete_gpu=$(xrandr --listproviders |  awk '/name:/ {print $NF}' | awk -F ':' '{print $NF}' | tail -n 1)
-integrated_gpu=$(xrandr --listproviders |  awk '/name:/ {print $NF}' | awk -F ':' '{print $NF}' | head -n 1)
-xrandr --setprovideroutputsource $descrete_gpu $integrated_gpu
+# descrete_gpu=$(xrandr --listproviders |  awk '/name:/ {print $NF}' | awk -F ':' '{print $NF}' | tail -n 1)
+# integrated_gpu=$(xrandr --listproviders |  awk '/name:/ {print $NF}' | awk -F ':' '{print $NF}' | head -n 1)
+# xrandr --setprovideroutputsource $descrete_gpu $integrated_gpu
 
-xrandr | grep "DP-1-1-3 connected" && ./.screenlayout/default.sh
+# xrandr | grep "DP-1-1-3 connected" && ./.screenlayout/default.sh
 #startplasma-x11
 while :; do
 	dwm || break

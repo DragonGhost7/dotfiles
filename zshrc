@@ -24,12 +24,20 @@ export ZSH="/home/$USER/.oh-my-zsh"
 
 plugins=(
 git-prompt
+cargo
+rust
+rustup
+history
+history-substring-search
+fzf
 )
 source $ZSH/oh-my-zsh.sh
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
+setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
+setopt EXTENDED_HISTORY  # record command start time
 setopt histignorespace
 unsetopt share_history
 
@@ -84,6 +92,7 @@ bindkey -s '^f' '"$(fzf)"\n'
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source ~/.fzf/shell/key-bindings.zsh
 eval $(thefuck --alias)
 complete -F _todo todo
 
