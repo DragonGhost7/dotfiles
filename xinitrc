@@ -21,7 +21,7 @@ echo "mpd" > ~/.cache/current_player
 dwmblocks &
 climpenud &
 # picom -b --unredir-if-possible --backend xr_glx_hybrid --vsync --use-damage --glx-no-stencil &
-# picom &
+picom &
 # mpDris2 &
 dex -a &
 
