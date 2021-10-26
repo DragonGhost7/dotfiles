@@ -24,9 +24,7 @@ export ZSH="/home/$USER/.oh-my-zsh"
 
 plugins=(
 git-prompt
-cargo
 rust
-rustup
 history
 history-substring-search
 fzf

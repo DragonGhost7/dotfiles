@@ -33,7 +33,7 @@ call plug#begin(expand('/home/$USER/.vim/plugged'))
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'vimwiki/vimwiki'
-Plug 'mattn/calendar-vim'
+" Plug 'mattn/calendar-vim'
 Plug 'kjwon15/vim-transparent'
 Plug 'mipmip/vim-scimark'
 Plug 'tpope/vim-commentary'
@@ -53,7 +53,7 @@ Plug 'jreybert/vimagit'
 " Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf', { 'do':{ -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer', 'for': 'typescript'}
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 let g:make = 'gmake'
@@ -320,7 +320,7 @@ noremap <Leader>gc :Gcommit<CR>
 noremap <Leader>gsh :Gpush<CR>
 noremap <Leader>gll :Gpull<CR>
 noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
+noremap <Leader>gb :Git blame<CR>
 noremap <Leader>gvd :Gvdiff<CR>
 noremap <Leader>gm :Gremove<CR>
 noremap <C-p>       :GFiles<CR>
@@ -652,7 +652,7 @@ let g:airline_symbols.crypt = '🔒'
 let g:airline_symbols.linenr = '☰ '
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.maxlinenr = '㏑'
 let g:airline_symbols.branch = '⎇'
@@ -663,7 +663,7 @@ let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = 'Ɇ'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" powerline symbols
+" " powerline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''

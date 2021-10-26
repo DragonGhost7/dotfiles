@@ -1,3 +1,0 @@
-while : ; do
-	mpc idle >/dev/null && kill -45 $(pidof "dwmblocks") || break
-done
