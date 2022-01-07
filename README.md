@@ -36,7 +36,6 @@ Right now present:
 - xinitrc
 - sxhkdrc
 - dwm
-![ScreenShot](screenshot.png)
 
 ## dwm autoexec folder
 
