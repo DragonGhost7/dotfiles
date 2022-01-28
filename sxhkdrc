@@ -24,6 +24,14 @@ alt + c
 	clipmenu
 
 
+## dunsctl shortcuts now moved here
+ctrl + space
+	dunstctl close
+ctrl + shift + space
+	dunstctl close-all
+ctrl + shift + ,
+	dunstctl context
+
 ## mount dmenu scripts
 super + w
     dmenuunicode
