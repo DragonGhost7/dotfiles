@@ -31,6 +31,7 @@ xrandr --setprovideroutputsource $descrete_gpu $integrated_gpu
 
 # xrandr | grep "DP-1-1-3 connected" && ./.screenlayout/default.sh
 #startplasma-x11
+# qtile start -c ~/.config/qtile/config.py
 while :; do
 	dwm || break
 done
