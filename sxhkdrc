@@ -20,12 +20,22 @@ super + s
 	/home/$USER/.bin/soundboard
 super + alt + p
 	/home/$USER/.bin/dmenuchoseplayer
+alt + c
+	clipmenu
 
+
+## dunsctl shortcuts now moved here
+ctrl + space
+	dunstctl close
+ctrl + shift + space
+	dunstctl close-all
+ctrl + shift + ,
+	dunstctl context
 
 ## mount dmenu scripts
 super + w
     dmenuunicode
-alt + M
+alt + m
     /home/$USER/.bin/dmenumount
 alt + u
     /home/$USER/.bin/dmenuunmount
@@ -49,8 +59,8 @@ super + {l, k}
     mortylocker { , && echo -n "mem" | sudo tee  /sys/power/state}
 
 ## utilities
-alt + Return
-   $TERMINAL
+#alt + Return
+#    $TERMINAL
 alt + w
 	$BROWSER
 alt + F12
@@ -66,5 +76,9 @@ shift + Print
     /home/$USER/.bin/dmenurecord
 #alt + c
 #    /home/$USER/.bin/camtoggle
+alt + m
+    /home/$USER/.bin/dmenumount
+alt + n
+    /home/$USER/.bin/dmenuunmount
 #alt + t
 #    /home/$USER/.bin/dmenutexdoc
