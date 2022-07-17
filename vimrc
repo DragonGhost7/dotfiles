@@ -5,7 +5,8 @@
 ""  \_/ |_|_| |_| |_|_|  \___|
 ""
 
-set nocompatible               " Be iMproved
+set nocompatible
+" Be iMproved
 " PLUGIN {{{
 
 let vimplug_exists=expand('/home/$USER/.vim/autoload/plug.vim')
@@ -43,19 +44,18 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'vim-utils/vim-man'
 Plug 'junegunn/goyo.vim'
 Plug 'dylanaraps/wal.vim'
 Plug 'morhetz/gruvbox'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jreybert/vimagit'
-" Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf', { 'do':{ -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer', 'for': 'typescript'}
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer'}
 let g:make = 'gmake'
 if exists('make')
 	let g:make = 'make'
@@ -126,6 +126,13 @@ endif
 set updatetime=300
 set shortmess+=c
 
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
 
 " session management
 let g:session_directory = "~/.vim/session"
@@ -156,7 +163,7 @@ if (has("nvim"))
 	set termguicolors
 	set background=dark
 	colorscheme gruvbox
-	lua require'colorizer'.setup()
+	" lua require 'colorizer'.setup()
 endif
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
@@ -182,7 +189,7 @@ else
 
 	" IndentLine
 	let g:indentLine_enabled = 1
-	let g:indentLine_concealcursor = 0
+	" let g:indentLine_concealcursor = 0
 	let g:indentLine_char = '┆'
 	let g:indentLine_faster = 1
 
@@ -275,10 +282,10 @@ endif
 
 " Autocmd Rules {{{
 "" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
-augroup vimrc-sync-fromstart
-	autocmd!
-	autocmd BufEnter * :syntax sync maxlines=200
-augroup END
+" augroup vimrc-sync-fromstart
+	" autocmd!
+	" autocmd BufEnter * :syntax sync maxlines=200
+" augroup END
 
 "" Remember cursor position
 augroup vimrc-remember-cursor-position
@@ -333,6 +340,8 @@ nnoremap <leader>sc :CloseSession<CR>
 " }}}
 "Completition {{{
 fun! GoYCM()
+	" let g:ycm_clangd_binary_path = '/usr/bin/clangd' move this up to work
+	" let g:ycm_clangd_args = ["--background-index -j=8 --header-insertion=never --limit-results=20 --malloc-trim --pch-storage=memory"]
 
 	let g:ycm_auto_trigger = 1
 	let g:ycm_python_interpreter_path = ''
@@ -344,6 +353,8 @@ fun! GoYCM()
 	let g:ycm_global_ycm_extra_conf = '~/.global_ycm_conf.py'
 	let g:ycm_auto_hover = 'CursorHold'
 	let g:ycm_use_clangd = 1
+	let g:ycm_clangd_binary_path = '/usr/bin/clangd'
+	let g:ycm_clangd_args = ["--header-insertion=never --limit-references=100 --limit-results=20 -j=8 --malloc-trim --background-index --pch-storage-memory"]
 	let g:ycm_add_preview_to_completeopt = 1
 	let g:ycm_autoclose_preview_window_after_completion = 1
 	let g:ycm_echo_current_diagnostic = 1
@@ -365,33 +376,62 @@ function! s:check_back_space() abort
 endfunction
 
 fun! GoCOC()
-	noremap <buffer> <silent><expr> <TAB>
+	inoremap <silent><expr> <TAB>
 				\ pumvisible() ? "\<C-n>" :
 				\ <SID>check_back_space() ? "\<TAB>" :
 				\ coc#refresh()
+	inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 	if exists('*complete_info')
 		inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 	else
 		inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 	endif
 
+	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+	                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 	autocmd User CocJumpPlaceholder call
 				\ CocActionAsync('showSignatureHelp')
-	inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-	inoremap <buffer> <silent><expr> <c-space> coc#refresh()
+	inoremap <silent><expr> <c-space> coc#refresh()
 	nmap <buffer> <silent> gd <Plug>(coc-definition)
 	nmap <buffer> <silent> gy <Plug>(coc-type-definition)
 	nmap <buffer> <silent> gi <Plug>(coc-implementation)
 	nmap <buffer> <silent> gr <Plug>(coc-references)
 	nmap <buffer> <leader>rn <Plug>(coc-rename)
 
-	nnoremap <buffer> <silent> K :call <SID>show_documentation()<CR>
+	nnoremap <buffer> <silent> K :call ShowDocumentation()<CR>
 	nmap <buffer> <silent> [g <Plug>(coc-diagnostic-prev)
 	nmap <buffer> <silent> ]g <Plug>(coc-diagnostic-next)
+	nmap <leader>aq  <Plug>(coc-fix-current))
+
+	function! ShowDocumentation()
+		if CocAction('hasProvider', 'hover')
+			call CocActionAsync('doHover')
+		else
+			call feedkeys('K', 'in')
+		endif
+	endfunction
+
+	autocmd CursorHold * silent call CocActionAsync('highlight')
+	xmap <leader>f  <Plug>(coc-format-selected)
+	nmap <leader>f  <Plug>(coc-format-selected)
+	if has('nvim-0.4.0') || has('patch-8.2.0750')
+		nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+		nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+		inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+		inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+		vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+		vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+	endif
+
+	set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+	" let b:coc_diagnostic_disable=1
+
+
 endfun
 
 autocmd Filetype python,cpp,cxx,h,hpp,c,rust :call GoCOC()
-" autocmd Filetype python :call GoYCM()
+" autocmd Filetype python, cpp, cxx,h,hpp,c, :call GoYCM()
 " }}}
 " Tabs {{{
 nnoremap <Tab> gt
@@ -406,7 +446,7 @@ map <C-m> <Plug>(Vman)
 
 "}}}
 " Vimwiki {{{
-						" \'custom_wiki2html':'/home/darkghost/.vim/plugged/vimwiki/autoload/vimwiki/customwiki2html.sh',
+" \'custom_wiki2html':'/home/darkghost/.vim/plugged/vimwiki/autoload/vimwiki/customwiki2html.sh',
 let g:vimwiki_list = [{'path': '~/vimwiki/',
 			\'syntax': 'markdown',
 			\'ext': '.md',
@@ -422,257 +462,259 @@ function! ToggleCalendar()
 			unlet g:calendar_open
 		else
 			g:calendar_open = 1
-		end
-	else
-		let g:calendar_open = 1
-	end
-endfunction
-:autocmd FileType vimwiki nmap <leader>ca :call ToggleCalendar()<CR>
+			end
+		else
+			let g:calendar_open = 1
+			end
+		endfunction
+		:autocmd FileType vimwiki nmap <leader>ca :call ToggleCalendar()<CR>
 
 
 
-"}}}
-" Set working directory
-nnoremap <leader>. :lcd %:p:h<CR>
-" Opens an edit command with the path of the currently edited file filled in
-noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+		"}}}
+		" Set working directory
+		nnoremap <leader>. :lcd %:p:h<CR>
+		" Opens an edit command with the path of the currently edited file filled in
+		noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
-" Opens a tab edit command with the path of the currently edited file filled
-noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-nmap <leader><leader>f gg=G
+		" Opens a tab edit command with the path of the currently edited file filled
+		noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+		nmap <leader><leader>f gg=G
 
-" The Silver Searcher
-if executable('ag')
-	let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-	set grepprg=ag\ --nogroup\ --nocolor
-endif
+		" The Silver Searcher
+		if executable('ag')
+			let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+			set grepprg=ag\ --nogroup\ --nocolor
+		endif
 
-" ripgrep
-if executable('rg')
-	let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-	set grepprg=rg\ --vimgrep
-	command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
+		" ripgrep
+		if executable('rg')
+			let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+			set grepprg=rg\ --vimgrep
+			command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+		endif
 
-cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-nnoremap <silent> <leader>b :buffers<CR>
-nnoremap <C-c> <Esc>
-" }}}
+		cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+		nnoremap <silent> <leader>b :buffers<CR>
+		nnoremap <C-c> <Esc>
+		" }}}
 
-""syntastic {{{
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=1
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_mode_map = { 'passive_filetypes': ['tex','python'] }
-let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
+		""syntastic {{{
+		let g:syntastic_always_populate_loc_list=1
+		let g:syntastic_error_symbol='✗'
+		let g:syntastic_warning_symbol='⚠'
+		let g:syntastic_style_error_symbol = '✗'
+		let g:syntastic_style_warning_symbol = '⚠'
+		let g:syntastic_auto_loc_list=1
+		let g:syntastic_aggregate_errors = 1
+		let g:syntastic_mode_map = { 'passive_filetypes': ['tex','python'] }
+		let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+		set statusline+=%#warningmsg#
+		set statusline+=%{SyntasticStatuslineFlag()}
+		set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+		let g:syntastic_always_populate_loc_list = 1
+		let g:syntastic_auto_loc_list = 1
+		" let g:syntastic_check_on_open = 1
+		let g:syntastic_check_on_wq = 1
+		" let g:syntastic_cpp_clang_check_post_args = ""
+		let g:syntastic_cpp_checkers = []
 
-" }}}
+		" }}}
 
-" Navigation {{{
-" Buffer nav {{{
-noremap <leader>z :bp<CR>
-noremap <leader>q :bp<CR>
-noremap <leader>x :bn<CR>
-noremap <leader>w :bn<CR>
+		" Navigation {{{
+		" Buffer nav {{{
+		noremap <leader>z :bp<CR>
+		noremap <leader>q :bp<CR>
+		noremap <leader>x :bn<CR>
+		noremap <leader>w :bn<CR>
 
-" }}}
+		" }}}
 
-" Close buffer {{{
-noremap <leader>c :bd<CR>
+		" Close buffer {{{
+		noremap <leader>c :bd<CR>
 
-" }}}
+		" }}}
 
-" Clean search (highlight) {{{
-nnoremap <silent> <leader><space> :noh<cr>
+		" Clean search (highlight) {{{
+		nnoremap <silent> <leader><space> :noh<cr>
 
-" }}}
+		" }}}
 
-" Switching windows {{{
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <C-h> <C-w>h
+		" Switching windows {{{
+		noremap <C-j> <C-w>j
+		noremap <C-k> <C-w>k
+		noremap <C-l> <C-w>l
+		noremap <C-h> <C-w>h
 
-" }}}
+		" }}}
 
-" Vmap for maintain Visual Mode after shifting > and < {{{
-vmap < <gv
-vmap > >gv
+		" Vmap for maintain Visual Mode after shifting > and < {{{
+		vmap < <gv
+		vmap > >gv
 
-" }}}
+		" }}}
 
-" Move visual block {{{
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+		" Move visual block {{{
+		vnoremap J :m '>+1<CR>gv=gv
+		vnoremap K :m '<-2<CR>gv=gv
 
-" }}}
+		" }}}
 
-" }}}
+		" }}}
 
-" Folding {{{
-" set foldclose=all " Close folds if you leave them in any way
-set foldenable " Turn on folding
-set foldmethod=marker " Fold on the marker
-"set foldopen=all " Open folds if you touch them in any way
+		" Folding {{{
+		" set foldclose=all " Close folds if you leave them in any way
+		set foldenable " Turn on folding
+		set foldmethod=marker " Fold on the marker
+		"set foldopen=all " Open folds if you touch them in any way
 
-" }}}
+		" }}}
 
-" Custom configs {{{
-" c
-" autocmd FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab
-" autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab
+		" Custom configs {{{
+		" c
+		" autocmd FileType c setlocal tabstop=4 shiftwidth=4 noexpandtab
+		" autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 noexpandtab
 
-"Scimark
+		"Scimark
 
-let g:scimCommand = '/usr/bin/sc-im'
-
-
-
-" YCM"
+		let g:scimCommand = '/usr/bin/sc-im'
 
 
-" jedi-vim"
-" let g:jedi#auto_initialization = 1
-" let g:jedi#completions_command = "<C-C>"
-" let g:jedi#goto_assignments_command = "<leader>g"
-" let g:jedi#goto_definitions_command = "<C-d>"
-" let g:jedi#documentation_command = "K"
-" let g:jedi#usages_command = "<leader>n"
-" let g:jedi#rename_command = "<leader>r"
-" let g:jedi#show_call_signatures = "0"
-" let g:jedi#smart_auto_mappings = 1
-" let g:jedi#popup_on_dot = 0
-" syntastic
-let g:syntastic_python_checkers=['python']
-"flake8
 
-" vim-airline
-let g:airline#extensions#virtualenv#enabled = 1
-
-" Syntax highlight
-" Default highlight is better than polyglot
-let g:polyglot_disabled = ['python']
-let python_highlight_all = 1
-
-" multi-cursor
-let g:multi_cursor_use_default_mapping=0
-
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-n>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_start_key           = 'g<C-n>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-let g:multi_cursor_next_key            = '<C-n>'
-let g:multi_cursor_prev_key            = '<C-b>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-
-:command Vimty :source ~/.vim/vimty.vim
+		" YCM"
 
 
-" Disable visualbell
-set noerrorbells visualbell t_vb=
-if has('autocmd')
-	autocmd GUIEnter * set visualbell t_vb=
-endif
+		" jedi-vim"
+		let g:jedi#auto_initialization = 1
+		let g:jedi#completions_command = "<C-C>"
+		let g:jedi#goto_assignments_command = "<leader>g"
+		let g:jedi#goto_definitions_command = "<C-d>"
+		let g:jedi#documentation_command = "K"
+		let g:jedi#usages_command = "<leader>n"
+		let g:jedi#rename_command = "<leader>r"
+		let g:jedi#show_call_signatures = "0"
+		let g:jedi#smart_auto_mappings = 1
+		let g:jedi#popup_on_dot = 0
+		" syntastic
+		let g:syntastic_python_checkers=['python']
+		"flake8
 
-"" Copy/Paste/Cut
-if has('unnamedplus')
-	set clipboard=unnamed,unnamedplus
-endif
+		" vim-airline
+		let g:airline#extensions#virtualenv#enabled = 1
 
-noremap YY "+y<CR>
-noremap <leader>p "+gP<CR>
-noremap XX "+x<CR>
+		" Syntax highlight
+		" Default highlight is better than polyglot
+		" let g:polyglot_disabled = ['python']
+		" let python_highlight_all = 1
 
+		" multi-cursor
+		let g:multi_cursor_use_default_mapping=0
 
-" }}}
+		" Default mapping
+		let g:multi_cursor_start_word_key      = '<C-n>'
+		let g:multi_cursor_select_all_word_key = '<A-n>'
+		let g:multi_cursor_start_key           = 'g<C-n>'
+		let g:multi_cursor_select_all_key      = 'g<A-n>'
+		let g:multi_cursor_next_key            = '<C-n>'
+		let g:multi_cursor_prev_key            = '<C-b>'
+		let g:multi_cursor_skip_key            = '<C-x>'
+		let g:multi_cursor_quit_key            = '<Esc>'
 
-" .bib {{{
-autocmd FileType bib inoremap ,a @article{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>journal<Space>=<Space>{<++>},<Enter>volume<Space>=<Space>{<++>},<Enter>pages<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
-autocmd FileType bib inoremap ,b @book{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>6kA,<Esc>i
-autocmd FileType bib inoremap ,c @incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
-
-" }}}
-
-" MARKDOWN {{{
-autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
-autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
-autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
-autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
-autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
-autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
-autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
-autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
-autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
-autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
-autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
-autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
-autocmd Filetype rmd inoremap ,r ``{r}<CR>``<CR><CR><esc>2kO
-autocmd Filetype rmd inoremap ,p ``{python}<CR>``<CR><CR><esc>2kO
-autocmd Filetype rmd inoremap ,c ``<cr>``<cr><cr><esc>2kO`]]"
-
-map <F5> :w! \| !compiler <c-r>%<CR>
-map .p :!opout <c-r>%<CR><CR>
-" }}}
-
-" Powerline variables  {{{
-
-" vim-airline
-" let g:airline_theme = 'promptline'
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_skip_empty_sections = 1
-let g:airline_theme='wal'
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '☰ '
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-" let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.maxlinenr = '㏑'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = 'Ɇ'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" " powerline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = '☰ '
-let g:airline_symbols.maxlinenr = ''
+		:command Vimty :source ~/.vim/vimty.vim
 
 
-" }}}
+		" Disable visualbell
+		set noerrorbells visualbell t_vb=
+		if has('autocmd')
+			autocmd GUIEnter * set visualbell t_vb=
+		endif
+
+		"" Copy/Paste/Cut
+		if has('unnamedplus')
+			set clipboard=unnamed,unnamedplus
+		endif
+
+		noremap YY "+y<CR>
+		noremap <leader>p "+gP<CR>
+		noremap XX "+x<CR>
+
+
+		" }}}
+
+		" .bib {{{
+		autocmd FileType bib inoremap ,a @article{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>journal<Space>=<Space>{<++>},<Enter>volume<Space>=<Space>{<++>},<Enter>pages<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
+		autocmd FileType bib inoremap ,b @book{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>6kA,<Esc>i
+		autocmd FileType bib inoremap ,c @incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
+
+		" }}}
+
+		" MARKDOWN {{{
+		autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
+		autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
+		autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
+		autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
+		autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
+		autocmd Filetype markdown,rmd inoremap ,h ====<Space><++><Esc>F=hi
+		autocmd Filetype markdown,rmd inoremap ,i ![](<++>)<++><Esc>F[a
+		autocmd Filetype markdown,rmd inoremap ,a [](<++>)<++><Esc>F[a
+		autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
+		autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
+		autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
+		autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
+		autocmd Filetype rmd inoremap ,r ``{r}<CR>``<CR><CR><esc>2kO
+		autocmd Filetype rmd inoremap ,p ``{python}<CR>``<CR><CR><esc>2kO
+		autocmd Filetype rmd inoremap ,c ``<cr>``<cr><cr><esc>2kO`]]"
+
+		map <F5> :w! \| !compiler <c-r>%<CR>
+		map .p :!opout <c-r>%<CR><CR>
+		" }}}
+
+		" Powerline variables  {{{
+
+		" vim-airline
+		" let g:airline_theme = 'promptline'
+		let g:airline#extensions#syntastic#enabled = 1
+		let g:airline#extensions#branch#enabled = 1
+		let g:airline#extensions#tabline#enabled = 1
+		let g:airline_skip_empty_sections = 1
+		let g:airline_theme='wal'
+		let g:airline_powerline_fonts = 1
+		if !exists('g:airline_symbols')
+			let g:airline_symbols = {}
+		endif
+
+		" unicode symbols
+		let g:airline_left_sep = '»'
+		let g:airline_left_sep = '▶'
+		let g:airline_right_sep = '«'
+		let g:airline_right_sep = '◀'
+		let g:airline_symbols.crypt = '🔒'
+		let g:airline_symbols.linenr = '☰ '
+		let g:airline_symbols.linenr = '␊'
+		let g:airline_symbols.linenr = '␤'
+		" let g:airline_symbols.linenr = '¶'
+		let g:airline_symbols.maxlinenr = ''
+		let g:airline_symbols.maxlinenr = '㏑'
+		let g:airline_symbols.branch = '⎇'
+		let g:airline_symbols.paste = 'ρ'
+		let g:airline_symbols.paste = 'Þ'
+		let g:airline_symbols.paste = '∥'
+		let g:airline_symbols.spell = 'Ꞩ'
+		let g:airline_symbols.notexists = 'Ɇ'
+		let g:airline_symbols.whitespace = 'Ξ'
+
+		" " powerline symbols
+		let g:airline_left_sep = ''
+		let g:airline_left_alt_sep = ''
+		let g:airline_right_sep = ''
+		let g:airline_right_alt_sep = ''
+		" let g:airline_symbols.branch = ''
+		let g:airline_symbols.branch = ''
+		let g:airline_symbols.readonly = ''
+		let g:airline_symbols.linenr = '☰ '
+		let g:airline_symbols.maxlinenr = ''
+
+
+		" }}}
