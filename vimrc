@@ -54,9 +54,8 @@ Plug 'jreybert/vimagit'
 Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf', { 'do':{ -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer', 'for': 'typescript'}
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer'}
 let g:make = 'gmake'
 if exists('make')
 	let g:make = 'make'
@@ -127,6 +126,13 @@ endif
 set updatetime=300
 set shortmess+=c
 
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
 
 " session management
 let g:session_directory = "~/.vim/session"
@@ -157,7 +163,7 @@ if (has("nvim"))
 	set termguicolors
 	set background=dark
 	colorscheme gruvbox
-	lua require'colorizer'.setup()
+	" lua require 'colorizer'.setup()
 endif
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
@@ -183,7 +189,7 @@ else
 
 	" IndentLine
 	let g:indentLine_enabled = 1
-	let g:indentLine_concealcursor = 0
+	" let g:indentLine_concealcursor = 0
 	let g:indentLine_char = '┆'
 	let g:indentLine_faster = 1
 
@@ -276,10 +282,10 @@ endif
 
 " Autocmd Rules {{{
 "" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
-augroup vimrc-sync-fromstart
-	autocmd!
-	autocmd BufEnter * :syntax sync maxlines=200
-augroup END
+" augroup vimrc-sync-fromstart
+	" autocmd!
+	" autocmd BufEnter * :syntax sync maxlines=200
+" augroup END
 
 "" Remember cursor position
 augroup vimrc-remember-cursor-position
@@ -334,6 +340,8 @@ nnoremap <leader>sc :CloseSession<CR>
 " }}}
 "Completition {{{
 fun! GoYCM()
+	" let g:ycm_clangd_binary_path = '/usr/bin/clangd' move this up to work
+	" let g:ycm_clangd_args = ["--background-index -j=8 --header-insertion=never --limit-results=20 --malloc-trim --pch-storage=memory"]
 
 	let g:ycm_auto_trigger = 1
 	let g:ycm_python_interpreter_path = ''
@@ -345,6 +353,8 @@ fun! GoYCM()
 	let g:ycm_global_ycm_extra_conf = '~/.global_ycm_conf.py'
 	let g:ycm_auto_hover = 'CursorHold'
 	let g:ycm_use_clangd = 1
+	let g:ycm_clangd_binary_path = '/usr/bin/clangd'
+	let g:ycm_clangd_args = ["--header-insertion=never --limit-references=100 --limit-results=20 -j=8 --malloc-trim --background-index --pch-storage-memory"]
 	let g:ycm_add_preview_to_completeopt = 1
 	let g:ycm_autoclose_preview_window_after_completion = 1
 	let g:ycm_echo_current_diagnostic = 1
@@ -366,33 +376,62 @@ function! s:check_back_space() abort
 endfunction
 
 fun! GoCOC()
-	noremap <buffer> <silent><expr> <TAB>
+	inoremap <silent><expr> <TAB>
 				\ pumvisible() ? "\<C-n>" :
 				\ <SID>check_back_space() ? "\<TAB>" :
 				\ coc#refresh()
+	inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 	if exists('*complete_info')
 		inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 	else
 		inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 	endif
 
+	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+	                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 	autocmd User CocJumpPlaceholder call
 				\ CocActionAsync('showSignatureHelp')
-	inoremap <buffer> <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-	inoremap <buffer> <silent><expr> <c-space> coc#refresh()
+	inoremap <silent><expr> <c-space> coc#refresh()
 	nmap <buffer> <silent> gd <Plug>(coc-definition)
 	nmap <buffer> <silent> gy <Plug>(coc-type-definition)
 	nmap <buffer> <silent> gi <Plug>(coc-implementation)
 	nmap <buffer> <silent> gr <Plug>(coc-references)
 	nmap <buffer> <leader>rn <Plug>(coc-rename)
 
-	nnoremap <buffer> <silent> K :call <SID>show_documentation()<CR>
+	nnoremap <buffer> <silent> K :call ShowDocumentation()<CR>
 	nmap <buffer> <silent> [g <Plug>(coc-diagnostic-prev)
 	nmap <buffer> <silent> ]g <Plug>(coc-diagnostic-next)
+	nmap <leader>aq  <Plug>(coc-fix-current))
+
+	function! ShowDocumentation()
+		if CocAction('hasProvider', 'hover')
+			call CocActionAsync('doHover')
+		else
+			call feedkeys('K', 'in')
+		endif
+	endfunction
+
+	autocmd CursorHold * silent call CocActionAsync('highlight')
+	xmap <leader>f  <Plug>(coc-format-selected)
+	nmap <leader>f  <Plug>(coc-format-selected)
+	if has('nvim-0.4.0') || has('patch-8.2.0750')
+		nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+		nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+		inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+		inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+		vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+		vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+	endif
+
+	set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+	" let b:coc_diagnostic_disable=1
+
+
 endfun
 
 autocmd Filetype python,cpp,cxx,h,hpp,c,rust :call GoCOC()
-" autocmd Filetype python :call GoYCM()
+" autocmd Filetype python, cpp, cxx,h,hpp,c, :call GoYCM()
 " }}}
 " Tabs {{{
 nnoremap <Tab> gt
@@ -477,8 +516,10 @@ function! ToggleCalendar()
 
 		let g:syntastic_always_populate_loc_list = 1
 		let g:syntastic_auto_loc_list = 1
-		let g:syntastic_check_on_open = 1
+		" let g:syntastic_check_on_open = 1
 		let g:syntastic_check_on_wq = 1
+		" let g:syntastic_cpp_clang_check_post_args = ""
+		let g:syntastic_cpp_checkers = []
 
 		" }}}
 
