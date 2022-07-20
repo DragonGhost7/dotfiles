@@ -22,7 +22,7 @@ dwmblocks &
 climpenud &
 # picom -b --unredir-if-possible --backend xr_glx_hybrid --vsync --use-damage --glx-no-stencil &
 picom &
-# mpDris2 &
+mpDris2 &
 dex -a &
 
 descrete_gpu=$(xrandr --listproviders |  awk '/name:/ {print $NF}' | awk -F ':' '{print $NF}' | tail -n 1)
