@@ -50,7 +50,7 @@ XF86AudioMute
 XF86AudioMicMute
     pactl set-source-mute @DEFAULT_SOURCE@ toggle
 XF86MonBrightness{Up,Down}
-    xbacklight -{inc,dec} 10
+    light -s sysfs/backlight/intel_backlight -{A,U} 10
 XF86Calculator
     speedcrunch
 

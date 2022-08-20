@@ -8,11 +8,8 @@
 # yay
 eval $(ssh-agent)
 export $(dbus-launch --exit-with-x11)
-# dunst > /dev/null 2>&1  &
+dunst > /dev/null 2>&1  &
 sxhkd -c /home/$USER/.sxhkdrc &
-
-pipewire &
-pipewire-pulse &
 
 unclutter -idle 3 &
 mpd
@@ -27,4 +24,4 @@ xrandr --setprovideroutputsource $descrete_gpu $integrated_gpu
 # xrandr | grep "DP-1-3.3 connected" && ./.screenlayout/default.sh
 ~/.bin/setbg /home/$USER/.config/wall.png
 xrdb load  $HOME/.Xdefaults
-exec awesome
+awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr

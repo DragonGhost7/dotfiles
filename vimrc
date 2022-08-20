@@ -126,13 +126,6 @@ endif
 set updatetime=300
 set shortmess+=c
 
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
 
 " session management
 let g:session_directory = "~/.vim/session"
@@ -306,6 +299,10 @@ augroup vimrc-make-cmake
 	autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
 
+
+autocmd VimLeave * call system('echo ' . shellescape(getreg('+')) .
+            \ ' | xclip')
+
 set autoread
 
 " }}}
@@ -376,19 +373,27 @@ function! s:check_back_space() abort
 endfunction
 
 fun! GoCOC()
-	inoremap <silent><expr> <TAB>
-				\ pumvisible() ? "\<C-n>" :
-				\ <SID>check_back_space() ? "\<TAB>" :
-				\ coc#refresh()
-	inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-	if exists('*complete_info')
-		inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-	else
-		inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-	endif
+	function! CheckBackspace() abort
+		  let col = col('.') - 1
+		    return !col || getline('.')[col - 1]  =~# '\s'
+	endfunction
 
-	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-	                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+	" inoremap <silent><expr> <Tab>
+	" 	  \ coc#pum#visible() ? coc#pum#next(1) :
+	" 	  \ CheckBackspace() ? "\<Tab>" :
+	" 	  \ coc#refresh()
+
+	inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+	inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+	inoremap <silent><expr> <c-space> coc#refresh()
+	inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+	" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+	" if exists('*complete_info')
+		" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+	" else
+		" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+	" endif
+
 
 	autocmd User CocJumpPlaceholder call
 				\ CocActionAsync('showSignatureHelp')
@@ -430,7 +435,7 @@ fun! GoCOC()
 
 endfun
 
-autocmd Filetype python,cpp,cxx,h,hpp,c,rust :call GoCOC()
+autocmd Filetype python,cpp,cxx,h,hpp,c,rust,html,css :call GoCOC()
 " autocmd Filetype python, cpp, cxx,h,hpp,c, :call GoYCM()
 " }}}
 " Tabs {{{
@@ -633,7 +638,7 @@ function! ToggleCalendar()
 
 		"" Copy/Paste/Cut
 		if has('unnamedplus')
-			set clipboard=unnamed,unnamedplus
+			set clipboard=unnamedplus,unnamed
 		endif
 
 		noremap YY "+y<CR>
