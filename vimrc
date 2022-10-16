@@ -86,6 +86,7 @@ set smartindent
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
+set termencoding=utf-8
 set bomb
 set binary
 set ttyfast
@@ -410,11 +411,11 @@ fun! GoCOC()
 	nmap <leader>aq  <Plug>(coc-fix-current))
 
 	function! ShowDocumentation()
-		if CocAction('hasProvider', 'hover')
+		" if CocAction('hasProvider', 'hover')
 			call CocActionAsync('doHover')
-		else
-			call feedkeys('K', 'in')
-		endif
+		" else
+			" call feedkeys('K', 'in')
+		" endif
 	endfunction
 
 	autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -435,7 +436,7 @@ fun! GoCOC()
 
 endfun
 
-autocmd Filetype python,cpp,cxx,h,hpp,c,rust,html,css :call GoCOC()
+autocmd Filetype python,cpp,cxx,h,hpp,c,rust,html,htmldjango,css,javascript :call GoCOC()
 " autocmd Filetype python, cpp, cxx,h,hpp,c, :call GoYCM()
 " }}}
 " Tabs {{{

@@ -89,7 +89,7 @@ bindkey -s '^f' '"$(fzf)"\n'
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 # Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.fzf/shell/key-bindings.zsh
 eval $(thefuck --alias)
 complete -F _todo todo
