@@ -145,10 +145,13 @@ complete -cf sudo
 
 
 
+export PATH=$PATH:/sbin
+export PATH=$PATH:/usr/sbin
 export PATH=$PATH:/home/$USER/.bin
 export PATH=$PATH:/home/$USER/mutt-wizard/bin
 export PATH=$PATH:/home/$USER/projects/flutter/bin
-export PATH=$PATH:/opt/texlive/2020/bin/x86_64-linux
+export PATH=$PATH:/opt/texlive/2022/bin/x86_64-linux
+export PATH=$PATH:/usr/lib/dart/bin
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 

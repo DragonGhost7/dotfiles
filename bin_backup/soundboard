@@ -1,0 +1,8 @@
+#!/bin/bash
+# vim: set filetype=bash :
+#checks for an arbitrary named audio sink that would transmit to voice input in a chat. If it exists then set it as audio device.
+
+dmenu="dmenu -l 30 "
+mpv --audio-device=help | grep vsink_fx && mpv="mpv --audio-device=pulse/vsink_fx" || mpv="mpv"
+
+ls ~/.soundboard  | $dmenu | while read line ; do echo "$HOME/.soundboard/$line"; done | xargs -r $mpv

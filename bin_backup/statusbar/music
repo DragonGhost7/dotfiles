@@ -1,0 +1,11 @@
+#!/bin/sh
+player=$(cat ~/.cache/current_player)
+
+if [ $player = 'spotifyd' ]; then
+	cat ~/.cache/spotifyd/metadata
+else
+playerctl -p $player metadata --format 'Album    {{album}}
+AlbumArtist     {{albumartist}}
+Artist    {{artist}}
+Title    {{title}}'
+fi

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $player = 'spotifyd' ]; then
+	spt playback --status -f "%s"
+	# cat ~/.cache/spotifyd/status
+else
+ playerctl -p $(cat ~/.cache/current_player) status -f '{{status}} {{playerName}}'
+fi

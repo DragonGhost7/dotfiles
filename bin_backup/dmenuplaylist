@@ -1,0 +1,4 @@
+#/bin/sh
+dmenu="dmenu -l 30 -fn Inconsolata"
+playlist=$(mpc lsplaylists | $dmenu && mpc clear -q )
+mpc load $playlist && mpc toggle

@@ -1,0 +1,19 @@
+#!/bin/bash
+revert() {
+  rm /tmp/*screen*.png
+  xset dpms 0 0 0
+  pkill -u "$USER" -USR2 dunst
+}
+trap revert HUP INT TERM
+xset +dpms dpms 0 0 5
+maim  /tmp/locking_screen.png
+
+convert -blur 0x8 /tmp/locking_screen.png /tmp/screen_blur.png
+if [ $(xrandr | grep current | awk {'print $8'}) -eq 3520 ];then
+convert -composite /tmp/screen_blur.png /home/$USER/Pictures/Wal/lock_morty_3.png -gravity South -geometry -20x1200 /tmp/screen.png
+else
+convert -composite /tmp/screen_blur.png /home/$USER/Pictures/Wal/lock_morty_2.png -gravity South -geometry -20x1200 /tmp/screen.png
+fi
+pkill -u "$USER" -USR1 dunst
+i3lock -i  /tmp/screen.png -t  -e
+revert
