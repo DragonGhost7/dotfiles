@@ -36,4 +36,7 @@ xrandr --setprovideroutputsource $descrete_gpu $integrated_gpu
 ~/.bin/setbg /home/$USER/.config/wall.png
 xrdb load  $HOME/.Xdefaults
 awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+# leftwm >> ~/.cache/leftwm/stdout 2>> ~/.cache/leftwm/stderr
+# hypr >> ~/.cache/leftwm/stdout 2>> ~/.cache/leftwm/stderr
+# spectrwm >> ~/.cache/leftwm/stdout 2>> ~/.cache/leftwm/stderr
 # qtile start

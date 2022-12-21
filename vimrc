@@ -54,6 +54,7 @@ Plug 'jreybert/vimagit'
 Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf', { 'do':{ -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
+Plug 'lervag/vimtex'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer'}
 let g:make = 'gmake'
@@ -107,6 +108,7 @@ set hidden
 
 "" Clipboard highjacking
 
+set conceallevel=0
 "" Searching
 set hlsearch
 set incsearch
@@ -125,15 +127,16 @@ else
 	set shell=/bin/sh
 endif
 set updatetime=300
+set signcolumn=yes
 set shortmess+=c
 
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O
 
 " session management
 let g:session_directory = "~/.vim/session"
@@ -171,9 +174,9 @@ if !exists('g:not_finish_vimplug')
 	colorscheme wal
 endif
 hi Pmenu ctermbg=black ctermfg=white
-" set background=dark
+set background=dark
 " autocmd vimenter * colorscheme gruvbox
-" hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=0
 
 set mousemodel=popup
 set t_Co=256
@@ -342,6 +345,9 @@ nnoremap <leader>so :OpenSession<Space>
 nnoremap <leader>ss :SaveSession<Space>
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
+
+nnoremap <leader>ge :.cc<CR>
+nnoremap <leader>cc :ccl<CR>
 " }}}
 "Completition {{{
 fun! GoYCM()
@@ -381,30 +387,28 @@ function! s:check_back_space() abort
 endfunction
 
 fun! GoCOC()
+
+	inoremap <silent><expr> <TAB>
+				\ coc#pum#visible() ? coc#pum#next(1) :
+				\ CheckBackspace() ? "\<Tab>" :
+				\ coc#refresh()
+	inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+	" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+		" \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+	inoremap <expr><CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+
 	function! CheckBackspace() abort
 		  let col = col('.') - 1
 		    return !col || getline('.')[col - 1]  =~# '\s'
 	endfunction
 
-	" inoremap <silent><expr> <Tab>
-	" 	  \ coc#pum#visible() ? coc#pum#next(1) :
-	" 	  \ CheckBackspace() ? "\<Tab>" :
-	" 	  \ coc#refresh()
-
-	inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-	inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+	"# inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+	" inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 	inoremap <silent><expr> <c-space> coc#refresh()
-	inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-	" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-	" if exists('*complete_info')
-		" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-	" else
-		" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-	" endif
-
-
-	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-	                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+	" inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 	autocmd User CocJumpPlaceholder call
 				\ CocActionAsync('showSignatureHelp')
@@ -446,14 +450,14 @@ fun! GoCOC()
 
 endfun
 
-autocmd Filetype python,cpp,cxx,h,hpp,c,rust,html,htmldjango,css,javascript :call GoCOC()
+autocmd Filetype python,cpp,cxx,h,hpp,c,rust,html,htmldjango,css,javascript,tex :call GoCOC()
 " autocmd Filetype python, cpp, cxx,h,hpp,c, :call GoYCM()
 " }}}
 " Tabs {{{
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<CR>
-nnoremap <C-Tab> :tabclose<CR>
+" nnoremap <Tab> gt
+" nnoremap <S-Tab> gT
+" nnoremap <silent> <S-t> :tabnew<CR>
+" nnoremap <C-Tab> :tabclose<CR>
 
 " }}}
 "viman {{{
@@ -488,6 +492,16 @@ function! ToggleCalendar()
 
 
 		"}}}
+		" vimtex {{{
+		let g:vimtex_view_method='zathura'
+
+		let cole = 0
+		let conceallevel=""
+		let g:tex_conceal = ""
+
+		" }}}
+
+
 		" Set working directory
 		nnoremap <leader>. :lcd %:p:h<CR>
 		" Opens an edit command with the path of the currently edited file filled in
@@ -542,14 +556,14 @@ function! ToggleCalendar()
 		" Navigation {{{
 		" Buffer nav {{{
 		noremap <leader>z :bp<CR>
-		noremap <leader>q :bp<CR>
+		" noremap <leader>q :bp<CR>
 		noremap <leader>x :bn<CR>
 		noremap <leader>w :bn<CR>
 
 		" }}}
 
 		" Close buffer {{{
-		noremap <leader>c :bd<CR>
+		noremap <leader>bc :bd<CR>
 
 		" }}}
 
