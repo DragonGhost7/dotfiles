@@ -55,6 +55,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'junegunn/fzf', { 'do':{ -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 Plug 'lervag/vimtex'
+Plug 'terrastruct/d2-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer'}
 let g:make = 'gmake'
@@ -709,7 +710,7 @@ function! ToggleCalendar()
 		let g:airline#extensions#branch#enabled = 1
 		let g:airline#extensions#tabline#enabled = 1
 		let g:airline_skip_empty_sections = 1
-		let g:airline_theme='wal'
+		let g:airline_theme='base16_gruvbox_dark_hard'
 		let g:airline_powerline_fonts = 1
 		if !exists('g:airline_symbols')
 			let g:airline_symbols = {}

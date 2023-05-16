@@ -10,5 +10,6 @@ export EDITOR="/usr/bin/vim"
 # [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 export SUDO_ASKPASS="/home/$USER/.bin/rofi-askpass"
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
+export MANGOHUD=1
 export GAMEMODERUNEXEC=prime-run
 #. "$HOME/.cargo/env"

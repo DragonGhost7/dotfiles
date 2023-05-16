@@ -61,7 +61,7 @@ super + {l, k}
     mortylocker { , && echo -n "mem" | sudo tee  /sys/power/state}
 
 ## utilities
-#alt + Return
+#alt + shift + Return
 #    $TERMINAL
 alt + w
 	$BROWSER

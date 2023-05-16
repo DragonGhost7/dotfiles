@@ -29,14 +29,15 @@ pipewire-pulse &
 picom &
 mpDris2 &
 dex -a &
+dwmblocks &
 descrete_gpu=$(xrandr --listproviders |  awk '/name:/ {print $NF}' | awk -F ':' '{print $NF}' | tail -n 1)
 integrated_gpu=$(xrandr --listproviders |  awk '/name:/ {print $NF}' | awk -F ':' '{print $NF}' | head -n 1)
 xrandr --setprovideroutputsource $descrete_gpu $integrated_gpu
 # xrandr | grep "DP-1-3.3 connected" && ./.screenlayout/default.sh
 ~/.bin/setbg /home/$USER/.config/wall.png
 xrdb load  $HOME/.Xdefaults
-awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
-# leftwm >> ~/.cache/leftwm/stdout 2>> ~/.cache/leftwm/stderr
-# hypr >> ~/.cache/leftwm/stdout 2>> ~/.cache/leftwm/stderr
-# spectrwm >> ~/.cache/leftwm/stdout 2>> ~/.cache/leftwm/stderr
-# qtile start
+
+while :; do
+	dwm || break
+done
+#startplasma-x11
