@@ -149,7 +149,7 @@ export PATH=$PATH:/sbin
 export PATH=$PATH:/usr/sbin
 export PATH=$PATH:/home/$USER/.bin
 export PATH=$PATH:/home/$USER/mutt-wizard/bin
-export PATH=$PATH:/home/$USER/projects/flutter/bin
+export PATH=$PATH:/home/$USER/Android/flutter/bin
 export PATH=$PATH:/opt/texlive/2022/bin/x86_64-linux
 export PATH=$PATH:/usr/lib/dart/bin
 export GPG_TTY=$(tty)
@@ -157,3 +157,19 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 
 eval "$(thefuck --alias)"
 # . "$HOME/.cargo/env"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/duck/.miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/duck/.miniconda/etc/profile.d/conda.sh" ]; then
+        . "/home/duck/.miniconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/duck/.miniconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

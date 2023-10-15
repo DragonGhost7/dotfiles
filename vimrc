@@ -52,11 +52,18 @@ Plug 'morhetz/gruvbox'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jreybert/vimagit'
 Plug 'davidhalter/jedi-vim'
+Plug 'rust-lang/rust.vim'
 Plug 'junegunn/fzf', { 'do':{ -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 Plug 'lervag/vimtex'
 Plug 'terrastruct/d2-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'othree/html5.vim'
+Plug 'wuelnerdotexe/vim-astro'
+Plug 'wavded/vim-stylus'
+Plug 'pangloss/vim-javascript'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
+Plug 'Shougo/context_filetype.vim',
 " Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clangd-completer'}
 let g:make = 'gmake'
 if exists('make')
@@ -389,6 +396,9 @@ endfunction
 
 fun! GoCOC()
 
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+				\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 	inoremap <silent><expr> <TAB>
 				\ coc#pum#visible() ? coc#pum#next(1) :
 				\ CheckBackspace() ? "\<Tab>" :
@@ -398,8 +408,7 @@ fun! GoCOC()
 	" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 		" \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-	inoremap <expr><CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-
+	" inoremap <expr><CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 	function! CheckBackspace() abort
 		  let col = col('.') - 1
@@ -451,7 +460,7 @@ fun! GoCOC()
 
 endfun
 
-autocmd Filetype python,cpp,cxx,h,hpp,c,rust,html,htmldjango,css,javascript,tex :call GoCOC()
+autocmd Filetype python,cpp,cxx,h,hpp,c,rust,html,htmldjango,css,postcss,javascript,typescript,svelte,tex,astro :call GoCOC()
 " autocmd Filetype python, cpp, cxx,h,hpp,c, :call GoYCM()
 " }}}
 " Tabs {{{
@@ -459,6 +468,16 @@ autocmd Filetype python,cpp,cxx,h,hpp,c,rust,html,htmldjango,css,javascript,tex 
 " nnoremap <S-Tab> gT
 " nnoremap <silent> <S-t> :tabnew<CR>
 " nnoremap <C-Tab> :tabclose<CR>
+"
+function! ToggleQuickFix()
+	if empty(filter(getwininfo(), 'v:val.quickfix'))
+		copen
+	else
+		cclose
+	endif
+endfunction
+
+nnoremap <silent><leader>fq :call ToggleQuickFix()<cr>
 
 " }}}
 "viman {{{
@@ -496,10 +515,23 @@ function! ToggleCalendar()
 		" vimtex {{{
 		let g:vimtex_view_method='zathura'
 
-		let cole = 0
-		let conceallevel=""
-		let g:tex_conceal = ""
+		let conceallevel="0"
+		let g:tex_conceal = "0"
+		let g:vimtex_syntax_conceal_disable = "1"
+		"
+		let g:vimtex_compiler_latexmk = {
+					\ 'executable' : 'latexmk',
+					\ 'options' : [
+					\   '-xelatex',
+					\   '-file-line-error',
+					\   '-synctex=1',
+					\   '-interaction=nonstopmode',
+					\ ],
+					\}
 
+		let g:vimtex_compiler_latexmk_engines = {
+			    \ '_'                : '-xelatex',
+				    \}
 		" }}}
 
 
@@ -613,11 +645,52 @@ function! ToggleCalendar()
 		let g:scimCommand = '/usr/bin/sc-im'
 
 
+		"Astro config
+		let g:astro_typescript = 'enable'
+		let g:astro_stylus = 'enable'
 
 		" YCM"
+		" Svelte
+		let g:svelte_indent_script = 1
+		let g:svelte_indent_style = 1
+		let g:svelte_preprocessor_tags = [
+			  \ { 'name': 'ts', 'tag': 'script', 'as': 'typescript' }
+		  \ ]
+		let g:svelte_preprocessors = ['ts']
 
+		" Svelte aware context filetype
 
-		" jedi-vim"
+		if !exists('g:context_filetype#same_filetypes')
+			  let g:context_filetype#filetypes = {}
+		endif
+
+		let g:context_filetype#filetypes.svelte =
+					\ [
+					\   {'filetype' : 'javascript', 'start' : '<script>', 'end' : '</script>'},
+					\   {
+					\     'filetype': 'typescript',
+					\     'start': '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
+					\     'end': '',
+					\   },
+					\   {'filetype' : 'css', 'start' : '<style \?.*>', 'end' : '</style>'},
+					\ ]
+
+		let g:ft = ''
+
+		let g:context_filetype#filetypes.rust =
+					\ [
+					\   {'filetype' : 'javascript', 'start' : '<script>', 'end' : '</script>'},
+					\   {
+					\     'filetype': 'typescript',
+					\     'start': '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
+					\     'end': '',
+					\   },
+					\   {'filetype' : 'css', 'start' : '<style \?.*>', 'end' : '</style>'},
+					\   {'filetype' : 'css', 'start' : 'class="', 'end' : '"'},
+					\   {'filetype' : 'html', 'start' : '<div>', 'end' : '</div>'},
+					\ ]
+
+		" " jedi-vim"
 		let g:jedi#auto_initialization = 1
 		let g:jedi#completions_command = "<C-C>"
 		let g:jedi#goto_assignments_command = "<leader>g"
@@ -630,6 +703,7 @@ function! ToggleCalendar()
 		let g:jedi#popup_on_dot = 0
 		" syntastic
 		let g:syntastic_python_checkers=['python']
+		let g:syntastic_svelte_checkers = ['javascript/eslint', 'html/htmlhint']
 		"flake8
 
 		" vim-airline

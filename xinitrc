@@ -26,13 +26,15 @@ echo "mpd" > ~/.cache/current_player
 # picom -b --unredir-if-possible --backend xr_glx_hybrid --vsync --use-damage --glx-no-stencil &
 pipewire &
 pipewire-pulse &
+# wireplumber &
 picom &
 mpDris2 &
-dex -a &
+# dex -a &
 dwmblocks &
 descrete_gpu=$(xrandr --listproviders |  awk '/name:/ {print $NF}' | awk -F ':' '{print $NF}' | tail -n 1)
 integrated_gpu=$(xrandr --listproviders |  awk '/name:/ {print $NF}' | awk -F ':' '{print $NF}' | head -n 1)
 xrandr --setprovideroutputsource $descrete_gpu $integrated_gpu
+###xrandr --setprovideroutputsource $integrated_gpu $descrete_gpu
 # xrandr | grep "DP-1-3.3 connected" && ./.screenlayout/default.sh
 ~/.bin/setbg /home/$USER/.config/wall.png
 xrdb load  $HOME/.Xdefaults
@@ -40,4 +42,4 @@ xrdb load  $HOME/.Xdefaults
 while :; do
 	dwm || break
 done
-#startplasma-x11
+# startplasma-x11
