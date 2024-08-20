@@ -4,12 +4,13 @@ echo "starting ssh"
 eval $(ssh-agent)
 echo "starting user dbus"
 export $(dbus-launch --exit-with-session)
+echo "starting pipewire"
+pipewire &
+pipewire-pulse &
 echo "starting mpd"
 mpd &
 echo "mpd" > ~/.cache/current_player
 mpDris2 &
-echo "starting pipewire"
-pipewire &
-pipewire-pulse &
 export _JAVA_AWT_WM_NONREPARENTING=1
-exec Hyprland >> ~/.hyprland/stdout 2>> ~/.hyprland/stderr
+exec dbus-run-session Hyprland >> ~/.hyprland/stdout 2>> ~/.hyprland/stderr
+#exec startplasma-wayland
